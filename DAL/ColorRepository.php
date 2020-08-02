@@ -39,6 +39,16 @@ values ('$colorName') RETURNING id;";
     return $result[0];
 }
 
+function UpdateColor($colorId, $colorName){
+    global $CONN_STRING;
+    $db_handle = pg_connect($CONN_STRING);
+    $query = "update color set name = '$colorName' where id = '$colorId' RETURNING id;";
+    $pg_query = pg_query($db_handle, $query);
+    $result = pg_fetch_row($pg_query);
+    pg_close($db_handle);
+    return $result[0];
+}
+
 function DeleteColor($Id){
     global $CONN_STRING;
     $db_handle = pg_connect($CONN_STRING);

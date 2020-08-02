@@ -39,6 +39,16 @@ values ('$cityName') RETURNING id;";
     return $result[0];
 }
 
+function UpdateCity($cityId, $cityName){
+    global $CONN_STRING;
+    $db_handle = pg_connect($CONN_STRING);
+    $query = "update city set name = '$cityName' where id = '$cityId' RETURNING id;";
+    $pg_query = pg_query($db_handle, $query);
+    $result = pg_fetch_row($pg_query);
+    pg_close($db_handle);
+    return $result[0];
+}
+
 function DeleteCity($Id){
     global $CONN_STRING;
     $db_handle = pg_connect($CONN_STRING);

@@ -39,6 +39,16 @@ values ('$fuelTypeName') RETURNING id;";
     return $result[0];
 }
 
+function UpdateFuelType($fuelTypeId, $fuelTypeName){
+    global $CONN_STRING;
+    $db_handle = pg_connect($CONN_STRING);
+    $query = "update fuel_type set name = '$fuelTypeName' where id = '$fuelTypeId' RETURNING id;";
+    $pg_query = pg_query($db_handle, $query);
+    $result = pg_fetch_row($pg_query);
+    pg_close($db_handle);
+    return $result[0];
+}
+
 function DeleteFuelType($Id){
     global $CONN_STRING;
     $db_handle = pg_connect($CONN_STRING);

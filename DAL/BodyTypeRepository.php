@@ -39,6 +39,16 @@ values ('$bodyTypeName') RETURNING id;";
     return $result[0];
 }
 
+function UpdateBodyType($bodyTypeId, $bodyTypeName){
+    global $CONN_STRING;
+    $db_handle = pg_connect($CONN_STRING);
+    $query = "update body_type set name = '$bodyTypeName' where id = '$bodyTypeId' RETURNING id;";
+    $pg_query = pg_query($db_handle, $query);
+    $result = pg_fetch_row($pg_query);
+    pg_close($db_handle);
+    return $result[0];
+}
+
 function DeleteBodyType($Id){
     global $CONN_STRING;
     $db_handle = pg_connect($CONN_STRING);

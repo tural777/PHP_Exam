@@ -1,5 +1,6 @@
 <?php
 require "DbConnection.php";
+require "CarImgRepository.php";
 
 function GetAllCars()
 {
@@ -28,7 +29,7 @@ function GetCarById($Id)
     return $arr;
 }
 
-function InsertCar($user_id, $city_id, $model_id, $year, $body_type_id, $color_id, $engineCapacity, $HP, $fuel_type_id, $mileage, $gearbox_type_id, $transmission_id, $price, $description, $title = '', $isActive = 0)
+function InsertCar($user_id, $city_id, $model_id, $year, $body_type_id, $color_id, $engineCapacity, $HP, $fuel_type_id, $mileage, $gearbox_type_id, $transmission_id, $price, $description,$Images = null, $title = '', $isActive = 0)
 {
     global $CONN_STRING;
     $db_handle = pg_connect($CONN_STRING);
@@ -36,6 +37,12 @@ function InsertCar($user_id, $city_id, $model_id, $year, $body_type_id, $color_i
 values ('$user_id','$title','$isActive','$city_id','$model_id','$year','$body_type_id','$color_id','$engineCapacity','$HP','$fuel_type_id','$mileage','$gearbox_type_id','$transmission_id','$price','$description') RETURNING id;";
     $pg_query = pg_query($db_handle, $query);
     $result = pg_fetch_row($pg_query);
+
+    if($Images != null){
+        InsertCarImg($Images,$result[0]);
+    }
+
+
     pg_close($db_handle);
     return $result[0];
 }

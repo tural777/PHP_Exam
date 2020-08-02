@@ -39,6 +39,16 @@ values ('$gearboxTypeName') RETURNING id;";
     return $result[0];
 }
 
+function UpdateGearboxType($gearboxTypeId, $gearboxTypeName){
+    global $CONN_STRING;
+    $db_handle = pg_connect($CONN_STRING);
+    $query = "update gearbox_type set name = '$gearboxTypeName' where id = '$gearboxTypeId' RETURNING id;";
+    $pg_query = pg_query($db_handle, $query);
+    $result = pg_fetch_row($pg_query);
+    pg_close($db_handle);
+    return $result[0];
+}
+
 function DeleteGearboxType($Id){
     global $CONN_STRING;
     $db_handle = pg_connect($CONN_STRING);

@@ -12,7 +12,7 @@ function GetCarImgByCarId($CarId)
     $query = "select * from car_img where car_id = '$CarId';";
     $pg_query = pg_query($db_handle, $query);
 
-    $arr = pg_fetch_assoc($pg_query);
+    $arr = pg_fetch_all($pg_query, PGSQL_ASSOC);
     pg_close($db_handle);
     return $arr;
 }

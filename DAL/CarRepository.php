@@ -44,7 +44,7 @@ function UpdateCar($car_id, $title, $isActive, $city_id, $model_id, $year, $body
 {
     global $CONN_STRING;
     $db_handle = pg_connect($CONN_STRING);
-    $query = "update car set (UpdateDate,Title, IsActive,City_Id,Model_Id, Year,Body_type_Id,Color_Id, EngineCapacity, HP,Fuel_type_Id, Mileage,Gearbox_type_Id,transmission_id, Price, Description) 
+    $query = "update car set (updated,Title, IsActive,City_Id,Model_Id, Year,Body_type_Id,Color_Id, EngineCapacity, HP,Fuel_type_Id, Mileage,Gearbox_type_Id,transmission_id, Price, Description) 
 = ('now()','$title','$isActive','$city_id','$model_id','$year','$body_type_id','$color_id','$engineCapacity','$HP','$fuel_type_id','$mileage','$gearbox_type_id','$transmission_id','$price','$description')
 where Id ='$car_id' RETURNING id;";
     $pg_query = pg_query($db_handle, $query);

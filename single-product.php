@@ -49,13 +49,9 @@
                         <?php
 
                         $queryString = $_SERVER["QUERY_STRING"];
-
                         $index = strpos($queryString, "id");
-
                         $id = substr($queryString, $index + 3, strlen($queryString));
-
                         $car = GetCarById($id);
-
 
                         foreach ($car as $x => $x_value) {
                             echo  "<div class='sp-heading'>

@@ -30,24 +30,8 @@
                             <div class="single-slide red zoom">
                                 <img src="assets/images/product/large-size/1.jpg" alt="Uren's Product Image">
                             </div>
-                            <div class="single-slide orange zoom">
-                                <img src="assets/images/product/large-size/2.jpg" alt="Uren's Product Image">
-                            </div>
-                            <div class="single-slide brown zoom">
-                                <img src="assets/images/product/large-size/3.jpg" alt="Uren's Product Image">
-                            </div>
-                            <div class="single-slide umber zoom">
-                                <img src="assets/images/product/large-size/4.jpg" alt="Uren's Product Image">
-                            </div>
-                            <div class="single-slide black zoom">
-                                <img src="assets/images/product/large-size/5.jpg" alt="Uren's Product Image">
-                            </div>
-                            <div class="single-slide green zoom">
-                                <img src="assets/images/product/large-size/6.jpg" alt="Uren's Product Image">
-                            </div>
                         </div>
-                        <div class="sp-img_slider-nav slick-slider-nav uren-slick-slider slider-navigation_style-4"
-                            data-slick-options='{
+                        <div class="sp-img_slider-nav slick-slider-nav uren-slick-slider slider-navigation_style-4" data-slick-options='{
                                                         "slidesToShow": 3,
                                                         "asNavFor": ".sp-img_slider",
                                                         "focusOnSelect": true,
@@ -57,116 +41,41 @@
                             <div class="single-slide red">
                                 <img src="assets/images/product/small-size/1.jpg" alt="Uren's Product Thumnail">
                             </div>
-                            <div class="single-slide orange">
-                                <img src="assets/images/product/small-size/2.jpg" alt="Uren's Product Thumnail">
-                            </div>
-                            <div class="single-slide brown">
-                                <img src="assets/images/product/small-size/3.jpg" alt="Uren's Product Thumnail">
-                            </div>
-                            <div class="single-slide umber">
-                                <img src="assets/images/product/small-size/4.jpg" alt="Uren's Product Thumnail">
-                            </div>
-                            <div class="single-slide red">
-                                <img src="assets/images/product/small-size/5.jpg" alt="Uren's Product Thumnail">
-                            </div>
-                            <div class="single-slide orange">
-                                <img src="assets/images/product/small-size/6.jpg" alt="Uren's Product Thumnail">
-                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-7">
                     <div class="sp-content">
-                        <div class="sp-heading">
-                            <h5><a href="#">Dolorem odio provident ut nihil</a></h5>
-                        </div>
-                        <span class="reference">Reference: demo_1</span>
-                        <div class="rating-box">
-                            <ul>
-                                <li><i class="ion-android-star"></i></li>
-                                <li><i class="ion-android-star"></i></li>
-                                <li><i class="ion-android-star"></i></li>
-                                <li class="silver-color"><i class="ion-android-star"></i></li>
-                                <li class="silver-color"><i class="ion-android-star"></i></li>
-                            </ul>
-                        </div>
-                        <div class="sp-essential_stuff">
-                            <ul>
-                                <li>Brands <a href="javascript:void(0)">Buxton</a></li>
-                                <li>Product Code: <a href="javascript:void(0)">Product 16</a></li>
-                                <li>Reward Points: <a href="javascript:void(0)">100</a></li>
-                                <li>Availability: <a href="javascript:void(0)">In Stock</a></li>
-                                <li>EX Tax: <a href="javascript:void(0)"><span>$453.35</span></a></li>
-                                <li>Price in reward points: <a href="javascript:void(0)">400</a></li>
-                            </ul>
-                        </div>
-                        <div class="product-size_box">
-                            <span>Size</span>
-                            <select class="myniceselect nice-select">
-                                <option value="1">S</option>
-                                <option value="2">M</option>
-                                <option value="3">L</option>
-                                <option value="4">XL</option>
-                            </select>
-                        </div>
-                        <div class="quantity">
-                            <label>Quantity</label>
-                            <div class="cart-plus-minus">
-                                <input class="cart-plus-minus-box" value="1" type="text">
-                                <div class="dec qtybutton"><i class="fa fa-angle-down"></i></div>
-                                <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
-                            </div>
-                        </div>
+                        <?php
+
+                        $queryString = $_SERVER["QUERY_STRING"];
+
+                        $index = strpos($queryString, "id");
+
+                        $id = substr($queryString, $index + 3, strlen($queryString));
+
+                        $car = GetCarById($id);
+
+
+                        foreach ($car as $x => $x_value) {
+                            echo  "<div class='sp-heading'>
+                                </div>
+                                <div class='sp-essential_stuff'><ul>";
+                            foreach ($x_value as $inX => $inX_value) {
+                                echo "<li><b>" . strtoupper($inX) . "</b>  :  " . $inX_value . "<li/>";
+                            }
+                            echo  "</ul></div>";
+                            break;
+                        }
+                        ?>
                         <div class="qty-btn_area">
                             <ul>
-                                <li><a class="qty-cart_btn" href="?page=cart">Add To Cart</a></li>
-                                <li><a class="qty-wishlist_btn" href="?page=wishlist" data-toggle="tooltip"
-                                        title="Add To Wishlist"><i class="ion-android-favorite-outline"></i></a>
+                                <li><a class="qty-wishlist_btn" href="?page=wishlist" data-toggle="tooltip" title="Add To Wishlist"><i class="ion-android-favorite-outline"></i></a>
                                 </li>
-                                <li><a class="qty-compare_btn" href="?page=compare" data-toggle="tooltip"
-                                        title="Compare This Product"><i class="ion-ios-shuffle-strong"></i></a>
-                                </li>
+
                             </ul>
                         </div>
-                        <div class="uren-tag-line">
-                            <h6>Tags:</h6>
-                            <a href="javascript:void(0)">vehicle</a>,
-                            <a href="javascript:void(0)">car</a>,
-                            <a href="javascript:void(0)">bike</a>
-                        </div>
-                        <div class="uren-social_link">
-                            <ul>
-                                <li class="facebook">
-                                    <a href="https://www.facebook.com/" data-toggle="tooltip" target="_blank"
-                                        title="Facebook">
-                                        <i class="fab fa-facebook"></i>
-                                    </a>
-                                </li>
-                                <li class="twitter">
-                                    <a href="https://twitter.com/" data-toggle="tooltip" target="_blank"
-                                        title="Twitter">
-                                        <i class="fab fa-twitter-square"></i>
-                                    </a>
-                                </li>
-                                <li class="youtube">
-                                    <a href="https://www.youtube.com/" data-toggle="tooltip" target="_blank"
-                                        title="Youtube">
-                                        <i class="fab fa-youtube"></i>
-                                    </a>
-                                </li>
-                                <li class="google-plus">
-                                    <a href="https://www.plus.google.com/discover" data-toggle="tooltip" target="_blank"
-                                        title="Google Plus">
-                                        <i class="fab fa-google-plus"></i>
-                                    </a>
-                                </li>
-                                <li class="instagram">
-                                    <a href="https://rss.com/" data-toggle="tooltip" target="_blank" title="Instagram">
-                                        <i class="fab fa-instagram"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
+
                     </div>
                 </div>
             </div>
@@ -306,15 +215,13 @@
                                     <div class="form-group required">
                                         <div class="col-sm-12 p-0">
                                             <label>Your Email <span class="required">*</span></label>
-                                            <input class="review-input" type="email" name="con_email" id="con_email"
-                                                required>
+                                            <input class="review-input" type="email" name="con_email" id="con_email" required>
                                         </div>
                                     </div>
                                     <div class="form-group required second-child">
                                         <div class="col-sm-12 p-0">
                                             <label class="control-label">Share your opinion</label>
-                                            <textarea class="review-textarea" name="con_message"
-                                                id="con_message"></textarea>
+                                            <textarea class="review-textarea" name="con_message" id="con_message"></textarea>
                                             <div class="help-block"><span class="text-danger">Note:</span> HTML
                                                 is not
                                                 translated!</div>
@@ -359,8 +266,7 @@
                     <span></span>
                     <h3>Related Products</h3>
                 </div>
-                <div class="product-slider uren-slick-slider slider-navigation_style-1 img-hover-effect_area"
-                    data-slick-options='{
+                <div class="product-slider uren-slick-slider slider-navigation_style-1 img-hover-effect_area" data-slick-options='{
                 "slidesToShow": 6,
                 "arrows" : true
                 }' data-slick-responsive='[
@@ -375,31 +281,21 @@
                             <div class="single-product">
                                 <div class="product-img">
                                     <a href="?page=single-product">
-                                        <img class="primary-img" src="assets/images/product/medium-size/1-1.jpg"
-                                            alt="Uren's Product Image">
-                                        <img class="secondary-img" src="assets/images/product/medium-size/1-2.jpg"
-                                            alt="Uren's Product Image">
+                                        <img class="primary-img" src="assets/images/product/medium-size/1-1.jpg" alt="Uren's Product Image">
+                                        <img class="secondary-img" src="assets/images/product/medium-size/1-2.jpg" alt="Uren's Product Image">
                                     </a>
                                     <div class="sticker">
                                         <span class="sticker">New</span>
                                     </div>
                                     <div class="add-actions">
                                         <ul>
-                                            <li><a class="uren-add_cart" href="?page=cart" data-toggle="tooltip"
-                                                    data-placement="top" title="Add To Cart"><i class="ion-bag"></i></a>
+                                            <li><a class="uren-add_cart" href="?page=cart" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="ion-bag"></i></a>
                                             </li>
-                                            <li><a class="uren-wishlist" href="?page=wishlist" data-toggle="tooltip"
-                                                    data-placement="top" title="Add To Wishlist"><i
-                                                        class="ion-android-favorite-outline"></i></a>
+                                            <li><a class="uren-wishlist" href="?page=wishlist" data-toggle="tooltip" data-placement="top" title="Add To Wishlist"><i class="ion-android-favorite-outline"></i></a>
                                             </li>
-                                            <li><a class="uren-add_compare" href="?page=compare" data-toggle="tooltip"
-                                                    data-placement="top" title="Compare This Product"><i
-                                                        class="ion-android-options"></i></a>
+                                            <li><a class="uren-add_compare" href="?page=compare" data-toggle="tooltip" data-placement="top" title="Compare This Product"><i class="ion-android-options"></i></a>
                                             </li>
-                                            <li class="quick-view-btn" data-toggle="modal"
-                                                data-target="#exampleModalCenter"><a href="javascript:void(0)"
-                                                    data-toggle="tooltip" data-placement="top" title="Quick View"><i
-                                                        class="ion-android-open"></i></a></li>
+                                            <li class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Quick View"><i class="ion-android-open"></i></a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -429,10 +325,8 @@
                             <div class="single-product">
                                 <div class="product-img">
                                     <a href="?page=single-product">
-                                        <img class="primary-img" src="assets/images/product/medium-size/2-1.jpg"
-                                            alt="Uren's Product Image">
-                                        <img class="secondary-img" src="assets/images/product/medium-size/2-2.jpg"
-                                            alt="Uren's Product Image">
+                                        <img class="primary-img" src="assets/images/product/medium-size/2-1.jpg" alt="Uren's Product Image">
+                                        <img class="secondary-img" src="assets/images/product/medium-size/2-2.jpg" alt="Uren's Product Image">
                                     </a>
                                     <div class="sticker-area-2">
                                         <span class="sticker-2">-20%</span>
@@ -440,21 +334,13 @@
                                     </div>
                                     <div class="add-actions">
                                         <ul>
-                                            <li><a class="uren-add_cart" href="?page=cart" data-toggle="tooltip"
-                                                    data-placement="top" title="Add To Cart"><i class="ion-bag"></i></a>
+                                            <li><a class="uren-add_cart" href="?page=cart" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="ion-bag"></i></a>
                                             </li>
-                                            <li><a class="uren-wishlist" href="?page=wishlist" data-toggle="tooltip"
-                                                    data-placement="top" title="Add To Wishlist"><i
-                                                        class="ion-android-favorite-outline"></i></a>
+                                            <li><a class="uren-wishlist" href="?page=wishlist" data-toggle="tooltip" data-placement="top" title="Add To Wishlist"><i class="ion-android-favorite-outline"></i></a>
                                             </li>
-                                            <li><a class="uren-add_compare" href="?page=compare" data-toggle="tooltip"
-                                                    data-placement="top" title="Compare This Product"><i
-                                                        class="ion-android-options"></i></a>
+                                            <li><a class="uren-add_compare" href="?page=compare" data-toggle="tooltip" data-placement="top" title="Compare This Product"><i class="ion-android-options"></i></a>
                                             </li>
-                                            <li class="quick-view-btn" data-toggle="modal"
-                                                data-target="#exampleModalCenter"><a href="javascript:void(0)"
-                                                    data-toggle="tooltip" data-placement="top" title="Quick View"><i
-                                                        class="ion-android-open"></i></a></li>
+                                            <li class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Quick View"><i class="ion-android-open"></i></a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -485,29 +371,19 @@
                             <div class="single-product">
                                 <div class="product-img">
                                     <a href="?page=single-product">
-                                        <img class="primary-img" src="assets/images/product/medium-size/3-1.jpg"
-                                            alt="Uren's Product Image">
-                                        <img class="secondary-img" src="assets/images/product/medium-size/3-2.jpg"
-                                            alt="Uren's Product Image">
+                                        <img class="primary-img" src="assets/images/product/medium-size/3-1.jpg" alt="Uren's Product Image">
+                                        <img class="secondary-img" src="assets/images/product/medium-size/3-2.jpg" alt="Uren's Product Image">
                                     </a>
                                     <span class="sticker">New</span>
                                     <div class="add-actions">
                                         <ul>
-                                            <li><a class="uren-add_cart" href="?page=cart" data-toggle="tooltip"
-                                                    data-placement="top" title="Add To Cart"><i class="ion-bag"></i></a>
+                                            <li><a class="uren-add_cart" href="?page=cart" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="ion-bag"></i></a>
                                             </li>
-                                            <li><a class="uren-wishlist" href="?page=wishlist" data-toggle="tooltip"
-                                                    data-placement="top" title="Add To Wishlist"><i
-                                                        class="ion-android-favorite-outline"></i></a>
+                                            <li><a class="uren-wishlist" href="?page=wishlist" data-toggle="tooltip" data-placement="top" title="Add To Wishlist"><i class="ion-android-favorite-outline"></i></a>
                                             </li>
-                                            <li><a class="uren-add_compare" href="?page=compare" data-toggle="tooltip"
-                                                    data-placement="top" title="Compare This Product"><i
-                                                        class="ion-android-options"></i></a>
+                                            <li><a class="uren-add_compare" href="?page=compare" data-toggle="tooltip" data-placement="top" title="Compare This Product"><i class="ion-android-options"></i></a>
                                             </li>
-                                            <li class="quick-view-btn" data-toggle="modal"
-                                                data-target="#exampleModalCenter"><a href="javascript:void(0)"
-                                                    data-toggle="tooltip" data-placement="top" title="Quick View"><i
-                                                        class="ion-android-open"></i></a></li>
+                                            <li class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Quick View"><i class="ion-android-open"></i></a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -537,10 +413,8 @@
                             <div class="single-product">
                                 <div class="product-img">
                                     <a href="?page=single-product">
-                                        <img class="primary-img" src="assets/images/product/medium-size/4-1.jpg"
-                                            alt="Uren's Product Image">
-                                        <img class="secondary-img" src="assets/images/product/medium-size/4-2.jpg"
-                                            alt="Uren's Product Image">
+                                        <img class="primary-img" src="assets/images/product/medium-size/4-1.jpg" alt="Uren's Product Image">
+                                        <img class="secondary-img" src="assets/images/product/medium-size/4-2.jpg" alt="Uren's Product Image">
                                     </a>
                                     <div class="sticker-area-2">
                                         <span class="sticker-2">-5%</span>
@@ -548,21 +422,13 @@
                                     </div>
                                     <div class="add-actions">
                                         <ul>
-                                            <li><a class="uren-add_cart" href="?page=cart" data-toggle="tooltip"
-                                                    data-placement="top" title="Add To Cart"><i class="ion-bag"></i></a>
+                                            <li><a class="uren-add_cart" href="?page=cart" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="ion-bag"></i></a>
                                             </li>
-                                            <li><a class="uren-wishlist" href="?page=wishlist" data-toggle="tooltip"
-                                                    data-placement="top" title="Add To Wishlist"><i
-                                                        class="ion-android-favorite-outline"></i></a>
+                                            <li><a class="uren-wishlist" href="?page=wishlist" data-toggle="tooltip" data-placement="top" title="Add To Wishlist"><i class="ion-android-favorite-outline"></i></a>
                                             </li>
-                                            <li><a class="uren-add_compare" href="?page=compare" data-toggle="tooltip"
-                                                    data-placement="top" title="Compare This Product"><i
-                                                        class="ion-android-options"></i></a>
+                                            <li><a class="uren-add_compare" href="?page=compare" data-toggle="tooltip" data-placement="top" title="Compare This Product"><i class="ion-android-options"></i></a>
                                             </li>
-                                            <li class="quick-view-btn" data-toggle="modal"
-                                                data-target="#exampleModalCenter"><a href="javascript:void(0)"
-                                                    data-toggle="tooltip" data-placement="top" title="Quick View"><i
-                                                        class="ion-android-open"></i></a></li>
+                                            <li class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Quick View"><i class="ion-android-open"></i></a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -593,29 +459,19 @@
                             <div class="single-product">
                                 <div class="product-img">
                                     <a href="?page=single-product">
-                                        <img class="primary-img" src="assets/images/product/medium-size/5-1.jpg"
-                                            alt="Uren's Product Image">
-                                        <img class="secondary-img" src="assets/images/product/medium-size/5-2.jpg"
-                                            alt="Uren's Product Image">
+                                        <img class="primary-img" src="assets/images/product/medium-size/5-1.jpg" alt="Uren's Product Image">
+                                        <img class="secondary-img" src="assets/images/product/medium-size/5-2.jpg" alt="Uren's Product Image">
                                     </a>
                                     <span class="sticker">New</span>
                                     <div class="add-actions">
                                         <ul>
-                                            <li><a class="uren-add_cart" href="?page=cart" data-toggle="tooltip"
-                                                    data-placement="top" title="Add To Cart"><i class="ion-bag"></i></a>
+                                            <li><a class="uren-add_cart" href="?page=cart" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="ion-bag"></i></a>
                                             </li>
-                                            <li><a class="uren-wishlist" href="?page=wishlist" data-toggle="tooltip"
-                                                    data-placement="top" title="Add To Wishlist"><i
-                                                        class="ion-android-favorite-outline"></i></a>
+                                            <li><a class="uren-wishlist" href="?page=wishlist" data-toggle="tooltip" data-placement="top" title="Add To Wishlist"><i class="ion-android-favorite-outline"></i></a>
                                             </li>
-                                            <li><a class="uren-add_compare" href="?page=compare" data-toggle="tooltip"
-                                                    data-placement="top" title="Compare This Product"><i
-                                                        class="ion-android-options"></i></a>
+                                            <li><a class="uren-add_compare" href="?page=compare" data-toggle="tooltip" data-placement="top" title="Compare This Product"><i class="ion-android-options"></i></a>
                                             </li>
-                                            <li class="quick-view-btn" data-toggle="modal"
-                                                data-target="#exampleModalCenter"><a href="javascript:void(0)"
-                                                    data-toggle="tooltip" data-placement="top" title="Quick View"><i
-                                                        class="ion-android-open"></i></a></li>
+                                            <li class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Quick View"><i class="ion-android-open"></i></a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -645,10 +501,8 @@
                             <div class="single-product">
                                 <div class="product-img">
                                     <a href="?page=single-product">
-                                        <img class="primary-img" src="assets/images/product/medium-size/6-1.jpg"
-                                            alt="Uren's Product Image">
-                                        <img class="secondary-img" src="assets/images/product/medium-size/6-2.jpg"
-                                            alt="Uren's Product Image">
+                                        <img class="primary-img" src="assets/images/product/medium-size/6-1.jpg" alt="Uren's Product Image">
+                                        <img class="secondary-img" src="assets/images/product/medium-size/6-2.jpg" alt="Uren's Product Image">
                                     </a>
                                     <div class="sticker-area-2">
                                         <span class="sticker-2">-15%</span>
@@ -656,21 +510,13 @@
                                     </div>
                                     <div class="add-actions">
                                         <ul>
-                                            <li><a class="uren-add_cart" href="?page=cart" data-toggle="tooltip"
-                                                    data-placement="top" title="Add To Cart"><i class="ion-bag"></i></a>
+                                            <li><a class="uren-add_cart" href="?page=cart" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="ion-bag"></i></a>
                                             </li>
-                                            <li><a class="uren-wishlist" href="?page=wishlist" data-toggle="tooltip"
-                                                    data-placement="top" title="Add To Wishlist"><i
-                                                        class="ion-android-favorite-outline"></i></a>
+                                            <li><a class="uren-wishlist" href="?page=wishlist" data-toggle="tooltip" data-placement="top" title="Add To Wishlist"><i class="ion-android-favorite-outline"></i></a>
                                             </li>
-                                            <li><a class="uren-add_compare" href="?page=compare" data-toggle="tooltip"
-                                                    data-placement="top" title="Compare This Product"><i
-                                                        class="ion-android-options"></i></a>
+                                            <li><a class="uren-add_compare" href="?page=compare" data-toggle="tooltip" data-placement="top" title="Compare This Product"><i class="ion-android-options"></i></a>
                                             </li>
-                                            <li class="quick-view-btn" data-toggle="modal"
-                                                data-target="#exampleModalCenter"><a href="javascript:void(0)"
-                                                    data-toggle="tooltip" data-placement="top" title="Quick View"><i
-                                                        class="ion-android-open"></i></a></li>
+                                            <li class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Quick View"><i class="ion-android-open"></i></a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -701,29 +547,19 @@
                             <div class="single-product">
                                 <div class="product-img">
                                     <a href="?page=single-product">
-                                        <img class="primary-img" src="assets/images/product/medium-size/7-1.jpg"
-                                            alt="Uren's Product Image">
-                                        <img class="secondary-img" src="assets/images/product/medium-size/7-2.jpg"
-                                            alt="Uren's Product Image">
+                                        <img class="primary-img" src="assets/images/product/medium-size/7-1.jpg" alt="Uren's Product Image">
+                                        <img class="secondary-img" src="assets/images/product/medium-size/7-2.jpg" alt="Uren's Product Image">
                                     </a>
                                     <span class="sticker">New</span>
                                     <div class="add-actions">
                                         <ul>
-                                            <li><a class="uren-add_cart" href="?page=cart" data-toggle="tooltip"
-                                                    data-placement="top" title="Add To Cart"><i class="ion-bag"></i></a>
+                                            <li><a class="uren-add_cart" href="?page=cart" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="ion-bag"></i></a>
                                             </li>
-                                            <li><a class="uren-wishlist" href="?page=wishlist" data-toggle="tooltip"
-                                                    data-placement="top" title="Add To Wishlist"><i
-                                                        class="ion-android-favorite-outline"></i></a>
+                                            <li><a class="uren-wishlist" href="?page=wishlist" data-toggle="tooltip" data-placement="top" title="Add To Wishlist"><i class="ion-android-favorite-outline"></i></a>
                                             </li>
-                                            <li><a class="uren-add_compare" href="?page=compare" data-toggle="tooltip"
-                                                    data-placement="top" title="Compare This Product"><i
-                                                        class="ion-android-options"></i></a>
+                                            <li><a class="uren-add_compare" href="?page=compare" data-toggle="tooltip" data-placement="top" title="Compare This Product"><i class="ion-android-options"></i></a>
                                             </li>
-                                            <li class="quick-view-btn" data-toggle="modal"
-                                                data-target="#exampleModalCenter"><a href="javascript:void(0)"
-                                                    data-toggle="tooltip" data-placement="top" title="Quick View"><i
-                                                        class="ion-android-open"></i></a></li>
+                                            <li class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Quick View"><i class="ion-android-open"></i></a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -753,29 +589,19 @@
                             <div class="single-product">
                                 <div class="product-img">
                                     <a href="?page=single-product">
-                                        <img class="primary-img" src="assets/images/product/medium-size/8-1.jpg"
-                                            alt="Uren's Product Image">
-                                        <img class="secondary-img" src="assets/images/product/medium-size/1-2.jpg"
-                                            alt="Uren's Product Image">
+                                        <img class="primary-img" src="assets/images/product/medium-size/8-1.jpg" alt="Uren's Product Image">
+                                        <img class="secondary-img" src="assets/images/product/medium-size/1-2.jpg" alt="Uren's Product Image">
                                     </a>
                                     <span class="sticker">New</span>
                                     <div class="add-actions">
                                         <ul>
-                                            <li><a class="uren-add_cart" href="?page=cart" data-toggle="tooltip"
-                                                    data-placement="top" title="Add To Cart"><i class="ion-bag"></i></a>
+                                            <li><a class="uren-add_cart" href="?page=cart" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="ion-bag"></i></a>
                                             </li>
-                                            <li><a class="uren-wishlist" href="?page=wishlist" data-toggle="tooltip"
-                                                    data-placement="top" title="Add To Wishlist"><i
-                                                        class="ion-android-favorite-outline"></i></a>
+                                            <li><a class="uren-wishlist" href="?page=wishlist" data-toggle="tooltip" data-placement="top" title="Add To Wishlist"><i class="ion-android-favorite-outline"></i></a>
                                             </li>
-                                            <li><a class="uren-add_compare" href="?page=compare" data-toggle="tooltip"
-                                                    data-placement="top" title="Compare This Product"><i
-                                                        class="ion-android-options"></i></a>
+                                            <li><a class="uren-add_compare" href="?page=compare" data-toggle="tooltip" data-placement="top" title="Compare This Product"><i class="ion-android-options"></i></a>
                                             </li>
-                                            <li class="quick-view-btn" data-toggle="modal"
-                                                data-target="#exampleModalCenter"><a href="javascript:void(0)"
-                                                    data-toggle="tooltip" data-placement="top" title="Quick View"><i
-                                                        class="ion-android-open"></i></a></li>
+                                            <li class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Quick View"><i class="ion-android-open"></i></a></li>
                                         </ul>
                                     </div>
                                 </div>

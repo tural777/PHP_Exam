@@ -27,6 +27,33 @@ select distinct Car.Id,Title,IsActive,added,updated, City.Name as City,Brand.Nam
     return $arr;
 }
 
+function GetAllCarsWithFilter($filter)
+{
+    global $CONN_STRING;
+    $db_handle = pg_connect($CONN_STRING);
+    $query = "
+select distinct Car.Id,Title,IsActive,added,updated, City.Name as City,Brand.Name as Brand,model.Name as Model,Year,Body_type.Name as BodyType,Color.Name as Color,EngineCapacity,HP,Fuel_type.Name as FuelType,Mileage,Gearbox_type.Name as Gearbox,Transmission.Name as Transmission,Price,Description, Car_Img.Img_Path from car
+    left join \"user\" u on Car.User_Id = u.Id
+    left join  city on Car.City_Id = city.Id
+    left join  model on Car.Model_Id = model.Id
+    left join  brand on Model.Brand_id = Brand.Id
+    left join  body_type  on Car.Body_type_Id = Body_type.id
+    left join  color  on Car.Color_Id = color.Id
+    left join  fuel_type  on Car.Fuel_type_Id =Fuel_type.Id
+    left join  gearbox_type  on Car.Gearbox_type_Id = Gearbox_type.Id
+    left join  transmission  on Car.Transmission_Id = transmission.Id
+    left join Car_Img on Car.Id = Car_Img.Car_Id
+    $filter
+    order by added desc;
+";
+    $pg_query = pg_query($db_handle, $query);
+
+    $arr = pg_fetch_all($pg_query, PGSQL_ASSOC);
+
+    pg_close($db_handle);
+    return $arr;
+}
+
 function GetCarById($Id)
 {
     if (!$Id) {
@@ -55,7 +82,7 @@ function GetCarById($Id)
     return $arr;
 }
 
-function InsertCar($user_id, $city_id, $model_id, $year, $body_type_id, $color_id, $engineCapacity, $HP, $fuel_type_id, $mileage, $gearbox_type_id, $transmission_id, $price, $description,$Images = null, $title = '', $isActive = 0)
+function InsertCar($user_id, $city_id, $model_id, $year, $body_type_id, $color_id, $engineCapacity, $HP, $fuel_type_id, $mileage, $gearbox_type_id, $transmission_id, $price, $description, $Images = null, $title = '', $isActive = 0)
 {
     global $CONN_STRING;
     $db_handle = pg_connect($CONN_STRING);
@@ -64,8 +91,8 @@ values ('$user_id','$title','$isActive','$city_id','$model_id','$year','$body_ty
     $pg_query = pg_query($db_handle, $query);
     $result = pg_fetch_row($pg_query);
 
-    if($Images != null){
-        InsertCarImg($Images,$result[0]);
+    if ($Images != null) {
+        InsertCarImg($Images, $result[0]);
     }
 
 

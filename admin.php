@@ -111,7 +111,6 @@
 
                             <thead class="thead-dark">
                                 <tr>
-
                                     <?php
 
                                     foreach (GetAllUsers() as $count => $array) {
@@ -123,7 +122,6 @@
                                     }
 
                                     ?>
-
                                 </tr>
                             </thead>
                             <tbody>

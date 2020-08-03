@@ -333,6 +333,7 @@
                                         </li>
                                         <li class=""><a href="?page=about-us">About Us</a></li>
                                         <li class=""><a href="?page=contact">Contact</a></li>
+                                        <li class=""><a href="?page=admin">Admin</a></li>
                                     </ul>
                                 </nav>
                             </div>

@@ -18,6 +18,7 @@ select distinct Car.Id,Title,IsActive,added,updated, City.Name as City,Brand.Nam
     left join  gearbox_type  on Car.Gearbox_type_Id = Gearbox_type.Id
     left join  transmission  on Car.Transmission_Id = transmission.Id
     left join Car_Img on Car.Id = Car_Img.Car_Id
+    order by added desc;
 ");
 
     $arr = pg_fetch_all($pg_query, PGSQL_ASSOC);
@@ -45,7 +46,7 @@ function GetCarById($Id)
     left join  gearbox_type  on Car.Gearbox_type_Id = Gearbox_type.Id
     left join  transmission  on Car.Transmission_Id = transmission.Id
     left join Car_Img on Car.Id = Car_Img.Car_Id
-    where Car.Id = '$Id'
+    where Car.Id = '$Id';
     ";
     $pg_query = pg_query($db_handle, $query);
 

@@ -53,7 +53,6 @@ if($color_id != "") {
     $filter .= "color_id = " .$color_id ;
     $isFirstFilter = false;
 }
-echo $filter;
 
 ?>
 

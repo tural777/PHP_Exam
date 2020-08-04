@@ -140,8 +140,8 @@
 
                                                 <div class="module-body mb-5">
                                                     <div class="module-list_item">
-                                                        <select class="nice-select wide" onchange="(window.location = '?page=main&brandId='+this.options[this.selectedIndex].value);">
-                                                            <option selected>All</option>
+                                                        <select class="form-control" id="brands">
+                                                            <option value="" selected>All</option>
                                                             <?php
                                                             include "./DAL/BrandRepository.php";
                                                             $brands = GetAllBrands();
@@ -165,17 +165,17 @@
 
                                                 <div class="module-body mb-5">
                                                     <div class="module-list_item">
-                                                        <select class="nice-select wide" name="model-id">
+                                                        <select class="form-control" name="model-id" id="models">
                                                             <option value="" selected>All</option>
-                                                            <?php
-                                                            if (isset($_GET['brandId'])) {
-                                                                include "./DAL/ModelRepository.php";
-                                                                $models = GetModelsByBrandId($_GET['brandId']);
-                                                                foreach ($models as $model) {
-                                                                    echo "<option value='$model[id]'>$model[name]</option>";
-                                                                }
-                                                            }
-                                                            ?>
+<!--                                                            --><?php
+//                                                            if (isset($_GET['brandId'])) {
+//                                                                include "./DAL/ModelRepository.php";
+//                                                                $models = GetModelsByBrandId($_GET['brandId']);
+//                                                                foreach ($models as $model) {
+//                                                                    echo "<option value='$model[id]'>$model[name]</option>";
+//                                                                }
+//                                                            }
+//                                                            ?>
                                                         </select>
 
                                                     </div>

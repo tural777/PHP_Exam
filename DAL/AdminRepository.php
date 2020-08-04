@@ -9,7 +9,9 @@ function GetAllCars()
     global $db_handle;
     
     $pg_query = pg_query($db_handle, "
-select distinct Car.Id,Title,IsActive,added,updated, City.Name as City,Brand.Name as Brand,model.Name as Model,Year,Body_type.Name as BodyType,Color.Name as Color,EngineCapacity,HP,Fuel_type.Name as FuelType,Mileage,Gearbox_type.Name as GearboxType,Transmission.Name as Transmission,Price,Description, Car_Img.Img_Path from car
+select distinct Car.Id,Title,IsActive,added,updated, City.Name as Cities,Brand.Name as Brand,model.Name as Model,
+Year,Body_type.Name as BodyType,Color.Name as Color,EngineCapacity,HP,Fuel_type.Name as FuelType,Mileage,
+Gearbox_type.Name as GearboxType,Transmission.Name as Transmission,Price,Description, Car_Img.Img_Path from car
     left join \"user\" u on Car.User_Id = u.Id
     left join  city on Car.City_Id = city.Id
     left join  model on Car.Model_Id = model.Id

@@ -41,11 +41,8 @@ function ShowTables($arrayAssoc, $tableName)
 
 
     <div class="m-3 p-1 shadow-sm border border-warning rounded">
-
-        <h2 class="mb-0">
-            <a style="text-decoration: none;" class="display-4 btn-block" data-toggle="collapse" href="#<?= $tableName ?>" ><?= $tableName ?></a>
-        </h2>
-
+        
+        <a style="text-decoration: none;" class="display-4 btn-block" data-toggle="collapse" href="#<?= $tableName ?>"><?=$tableName?></a>
         
 
         <div class="row">
@@ -110,11 +107,16 @@ function ShowTables($arrayAssoc, $tableName)
 
                                                 echo '<td>';
 
-                                                if (function_exists("GetAll" . $Key . "s") || function_exists("GetAll" . $Key)) {
+                                                if (function_exists("GetAll" . ucfirst($Key) . "s") || function_exists("GetAll" . ucfirst($Key))) {
                                                     echo '<select class="form-control">
                                                         <option selected disabled>' . ucfirst($Key) . '</option>';
 
-                                                    $TempAddFuncForAdmin = "GetAll" . $Key . "s";
+                                                        $TempAddFuncForAdmin = "GetAll" . ucfirst($Key);
+                                                        
+                                                        if(!function_exists($TempAddFuncForAdmin)){
+                                                            $TempAddFuncForAdmin = "GetAll" . ucfirst($Key) . "s";
+                                                        }
+                                                            
 
                                                     foreach ($TempAddFuncForAdmin() as $index => $array) {
                                                         foreach ($array as $Key => $Value) {
@@ -161,6 +163,7 @@ function ShowTables($arrayAssoc, $tableName)
             </div>
 
         </div>
+
     </div>
 
 

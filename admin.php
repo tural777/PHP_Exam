@@ -23,17 +23,32 @@
 require "./DAL/AdminRepository.php";
 
 
-
+$getAllBodyTypes = GetAllBodyTypes();
+$getAllBrands = GetAllBrands();
 $getAllCars = GetAllCars();
-//$getAllUsers = GetAllUsers();
-//$getAllBrands = GetAllBrands();
-//$getAllCity = GetAllCities();
+$getAllCities = GetAllCities();
+$getAllColors = GetAllColors();
+$getAllFuelTypes = GetAllFuelTypes();
+$getAllGearboxTypes = GetAllGearboxTypes();
+$getAllModels = GetAllModels();
+$getAllRoles = GetAllRoles();
+$getAllTransmissions = GetAllTransmissions();
+$getAllUsers = GetAllUsers();
 
 
+ShowTables($getAllBodyTypes, "BodyTypes");
+ShowTables($getAllBrands, "Brands");
 ShowTables($getAllCars, "Cars");
-//ShowTables($getAllUsers, "Users");
-//ShowTables($getAllBrands, "Brands");
-//ShowTables($getAllCity, "Cities");
+ShowTables($getAllCities, "Cities");
+ShowTables($getAllColors, "Colors");
+ShowTables($getAllFuelTypes, "FuelTypes");
+ShowTables($getAllGearboxTypes, "GearboxTypes");
+ShowTables($getAllModels, "Models");
+ShowTables($getAllRoles, "Roles");
+ShowTables($getAllTransmissions, "Transmissions");
+ShowTables($getAllUsers, "Users");
+
+
 
 function ShowTables($arrayAssoc, $tableName)
 {
@@ -112,7 +127,7 @@ function ShowTables($arrayAssoc, $tableName)
                                                         <option selected disabled>' . ucfirst($Key) . '</option>';
 
                                                         $TempAddFuncForAdmin = "GetAll" . ucfirst($Key);
-                                                        
+
                                                         if(!function_exists($TempAddFuncForAdmin)){
                                                             $TempAddFuncForAdmin = "GetAll" . ucfirst($Key) . "s";
                                                         }
@@ -129,12 +144,14 @@ function ShowTables($arrayAssoc, $tableName)
                                                     echo '</select>';
                                                 } elseif (ucfirst($Key) == "Id") {
                                                     echo '<input readonly class="form-control" placeholder="' . ucfirst($Key) . '">';
-                                                } elseif (ucfirst($Key) == "Img_path") {
-                                                    echo    '<div class="form-group"><label class="form-control" for="file-upload" style="border: 1px solid #ccc; display: inline-block; padding: 6px 12px; cursor: pointer;">
-                                                            <i class="fas fa-cloud-upload-alt"></i> Custom
-                                                        </label>
-                                                            <input  id="file-upload" style="display: none;" type="file" multiple/></div>';
-                                                } else {
+                                                }
+                                                //elseif (ucfirst($Key) == "Img_path") {
+                                                //     echo    '<div class="form-group"><label class="form-control" for="file-upload" style="border: 1px solid #ccc; display: inline-block; padding: 6px 12px; cursor: pointer;">
+                                                //             <i class="fas fa-cloud-upload-alt"></i> Custom
+                                                //         </label>
+                                                //             <input  id="file-upload" style="display: none;" type="file" multiple/></div>';
+                                                // } 
+                                                else {
                                                     echo '<input class="form-control" placeholder="' . ucfirst($Key) . '">';
                                                 }
                                                 echo '</td>';

@@ -95,12 +95,19 @@ function ShowTables($arrayAssoc, $tableName)
 
                                                 if (function_exists("GetAll" . $Key. "s") || function_exists("GetAll" . $Key)) {
                                                     echo '<select class="form-control">
-                                                            <option selected disabled>' . ucfirst($Key) .'</option>
-                                                            <option>2</option>
-                                                            <option>3</option>
-                                                            <option>4</option>
-                                                            <option>5</option>
-                                                        </select>';
+                                                            <option selected disabled>' . ucfirst($Key) .'</option>';
+                                                            
+                                                            $TempAddFuncForAdmin = "GetAll" . $Key. "s";
+
+                                                            foreach ($TempAddFuncForAdmin() as $index => $array) {
+                                                                foreach ($array as $Key => $Value) {
+                                                                    if(ucfirst($Key) == "Name")
+                                                                    echo '<option> '. $Value .'</option>';
+                                                                } 
+                                                            }
+
+
+                                                    echo '</select>';
 
                                                 }elseif(ucfirst($Key) == "Id"){
                                                     echo '<input readonly class="form-control" placeholder="' .ucfirst($Key) . '">';

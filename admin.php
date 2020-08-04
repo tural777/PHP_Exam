@@ -10,15 +10,15 @@ require "./DAL/GearboxTypeRepository.php";
 
 
 $getAllCars = GetAllCars();
-$getAllUsers = GetAllUsers();
-$getAllBrands = GetAllBrands();
-$getAllCity = GetAllCities();
+//$getAllUsers = GetAllUsers();
+//$getAllBrands = GetAllBrands();
+//$getAllCity = GetAllCities();
 
 
 ShowTables($getAllCars, "Cars");
-ShowTables($getAllUsers, "Users");
-ShowTables($getAllBrands, "Brands");
-ShowTables($getAllCity, "Cities");
+//ShowTables($getAllUsers, "Users");
+//ShowTables($getAllBrands, "Brands");
+//ShowTables($getAllCity, "Cities");
 
 
 
@@ -41,20 +41,19 @@ function ShowTables($arrayAssoc, $tableName)
                             <table class="table table-striped table-sm  table-hover text-center">
 
                                 <thead class="thead-dark">
-                                    <tr>
+                                    <tr >
 
                                         <?php
 
                                         foreach ($arrayAssoc as $count => $array) {
                                             foreach ($array as $Key => $Value) {
-                                                echo "<th>" . ucfirst($Key) . "</th>";
+                                                echo '<th class="px-5">' . ucfirst($Key) . '</th>';
                                             }
                                             echo "<th>Control</th>";
                                             break;
                                         }
 
                                         ?>
-
                                     </tr>
                                 </thead>
 
@@ -95,16 +94,32 @@ function ShowTables($arrayAssoc, $tableName)
                                                 echo '<td>';
 
                                                 if (function_exists("GetAll" . $Key. "s") || function_exists("GetAll" . $Key)) {
-                                                    echo "ForeignKEY";
-                                                } else {
-                                                    echo '<input placeholder="' .ucfirst($Key) . '">';
+                                                    echo '<select class="form-control">
+                                                            <option selected disabled>' . ucfirst($Key) .'</option>
+                                                            <option>2</option>
+                                                            <option>3</option>
+                                                            <option>4</option>
+                                                            <option>5</option>
+                                                        </select>';
+
+                                                }elseif(ucfirst($Key) == "Id"){
+                                                    echo '<input readonly class="form-control" placeholder="' .ucfirst($Key) . '">';
+
+                                                }elseif(ucfirst($Key) == "Img_path"){
+                                                    echo    '<div class="form-group"><label class="form-control" for="file-upload" style="border: 1px solid #ccc; display: inline-block; padding: 6px 12px; cursor: pointer;">
+                                                                <i class="fas fa-cloud-upload-alt"></i> Custom
+                                                            </label>
+                                                             <input  id="file-upload" style="display: none;" type="file" multiple/></div>';
+                                                }
+                                                 else {
+                                                    echo '<input class="form-control" placeholder="' .ucfirst($Key) . '">';
                                                 }
                                                 echo '</td>';
                                             }
 
                                             echo '<td>
-                                                        <a class="btn btn-primary btn-sm btn-block" href="#">
-                                                            <i class="fas fa-plus-circle fa-lg"></i></a>
+                                                        <a class="btn btn-primary btn-sm" style="width: 65px; height:37px;" href="#">
+                                                            <i class="fas fa-plus-circle fa-lg pt-2"></i></a>
                                                 </td>';
 
 

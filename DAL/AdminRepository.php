@@ -116,7 +116,9 @@ function GetAllUsers()
 {
     global $db_handle;
 
-    $pg_query = pg_query($db_handle, "SELECT * FROM \"user\";");
+    $pg_query = pg_query($db_handle, 
+    'select "user".Id,"user".name,surname,Email,Password,Role.Name as Roles from "user"
+    left join Role on Role_Id = Role.Id');
 
     return pg_fetch_all($pg_query, PGSQL_ASSOC);
 }
@@ -156,5 +158,16 @@ function InsertModel($name, $brandId)
     pg_query($db_handle, $query);
 }
 
+
+
+function InsertUser($name, $surname, $email, $password, $role_id)
+{
+    global $db_handle;
+    $query = "insert into \"user\" (email, password,role_id,name,surname) 
+    values ('$email','$password','$role_id','$name','$surname')";
+    $pg_query = pg_query($db_handle, $query);
+    //$result = pg_fetch_row($pg_query);
+    //return $result[0];
+}
 
 ?>

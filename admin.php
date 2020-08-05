@@ -41,13 +41,21 @@ $action = isset($_GET["Action"]) ? $_GET["Action"] : "";
 $tableName = isset($_GET["TableName"]) ? $_GET["TableName"] : "";
 $name = isset($_GET["Name"]) ? $_GET["Name"] : "";
 $brandId= isset($_GET["Brands"]) ? $_GET["Brands"] : "";
+$surName = isset($_GET["Surname"]) ? $_GET["Surname"] : "";
+$email = isset($_GET["Email"]) ? $_GET["Email"] : "";
+$pass = isset($_GET["Password"]) ? $_GET["Password"] : "";
+$roleId = isset($_GET["Roles"]) ? $_GET["Roles"] : "";
 
 
 //Testing
-echo "Action: " . $action;
-echo "TableName: " . $tableName;
-echo "Name: " . $name;
-echo "BrandId: " . $brandId;
+echo "<br>Action: " . $action;
+echo "<br>TableName: " . $tableName;
+echo "<br>Name: " . $name;
+echo "<br>BrandId: " . $brandId;
+echo "<br>SurName: " . $surName;
+echo "<br>Email: " . $email;
+echo "<br>Pass: " . $pass;
+echo "<br>RoleId: " . $roleId;
 
 
 
@@ -64,6 +72,7 @@ if($name != ""){
             elseif($tableName == "Roles") GenericInsertOnlyOneColumn("role", $name);
             elseif($tableName == "Transmissions") GenericInsertOnlyOneColumn("transmission", $name);
             elseif($tableName == "Models") InsertModel($name, $brandId);
+            elseif($tableName == "Users") InsertUser($name, $surName, $email,$pass,$roleId);
         break;
     }
 }
@@ -79,7 +88,7 @@ if($name != ""){
 //$getAllModels = GetAllModels();                 //ADD+
 //$getAllRoles = GetAllRoles();                   //ADD+
 //$getAllTransmissions = GetAllTransmissions();   //ADD+
-$getAllUsers = GetAllUsers();                   //ADD-
+$getAllUsers = GetAllUsers();                   //ADD+
 
 
 

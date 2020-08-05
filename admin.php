@@ -11,6 +11,7 @@ require_once "./DAL/DbConnection.php";
 $db_handle = pg_connect($CONN_STRING);
 require_once "./DAL/AdminRepository.php";
 ?>
+
 <!DOCTYPE html>
     <html lang="en">
 
@@ -67,24 +68,24 @@ switch($action){
 
 
 
-$getAllBodyTypes = GetAllBodyTypes();           //+
-$getAllBrands = GetAllBrands();                 //+
-$getAllCars = GetAllCars();                     //-
-$getAllCities = GetAllCities();                 //+
-$getAllColors = GetAllColors();                 //+
-$getAllFuelTypes = GetAllFuelTypes();           //+
-$getAllGearboxTypes = GetAllGearboxTypes();     //+
-$getAllModels = GetAllModels();                 //-
-$getAllRoles = GetAllRoles();                   //+
-$getAllTransmissions = GetAllTransmissions();   //+
-$getAllUsers = GetAllUsers();                   //-
+$getAllBodyTypes = GetAllBodyTypes();           //ADD+
+$getAllBrands = GetAllBrands();                 //ADD+
+//$getAllCars = GetAllCars();                     //ADD-
+$getAllCities = GetAllCities();                 //ADD+
+$getAllColors = GetAllColors();                 //ADD+
+$getAllFuelTypes = GetAllFuelTypes();           //ADD+
+$getAllGearboxTypes = GetAllGearboxTypes();     //ADD+
+$getAllModels = GetAllModels();                 //ADD-
+$getAllRoles = GetAllRoles();                   //ADD+
+$getAllTransmissions = GetAllTransmissions();   //ADD+
+$getAllUsers = GetAllUsers();                   //ADD-
 
 
 
 //Call Functions with Table Name
 ShowTables($getAllBodyTypes, "BodyTypes");
 ShowTables($getAllBrands, "Brands");
-ShowTables($getAllCars, "Cars");
+//ShowTables($getAllCars, "Cars");
 ShowTables($getAllCities, "Cities");
 ShowTables($getAllColors, "Colors");
 ShowTables($getAllFuelTypes, "FuelTypes");

@@ -181,6 +181,12 @@ function InsertCar($user_id, $title ,$city_id, $model_id, $year, $body_type_id, 
 }
 
 
+function GenericDeleteById($table, $Id){
+    global $db_handle;
+    $query = "delete from \"$table\" where id = '$Id'";
+    pg_query($db_handle, $query);
+}
+
 
 
 ?>

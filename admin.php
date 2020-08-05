@@ -38,81 +38,79 @@ require_once "./DAL/AdminRepository.php";
 
 
 $action = isset($_GET["Action"]) ? $_GET["Action"] : "";
-$tableName = isset($_GET["TableName"]) ? $_GET["TableName"] : "";
-$name = isset($_GET["Name"]) ? $_GET["Name"] : "";
-$brandId= isset($_GET["Brands"]) ? $_GET["Brands"] : "";
-$surName = isset($_GET["Surname"]) ? $_GET["Surname"] : "";
-$email = isset($_GET["Email"]) ? $_GET["Email"] : "";
-$pass = isset($_GET["Password"]) ? $_GET["Password"] : "";
-$roleId = isset($_GET["Roles"]) ? $_GET["Roles"] : "";
-$title = isset($_GET["Title"]) ? $_GET["Title"] : "";
-$isActive = isset($_GET["Isactive"]) ? $_GET["Isactive"] : "";
-$cityId = isset($_GET["Cities"]) ? $_GET["Cities"] : "";
-$modelId = isset($_GET["Models"]) ? $_GET["Models"] : "";
-$year = isset($_GET["Year"]) ? $_GET["Year"] : "";
-$bodytypeId = isset($_GET["Bodytypes"]) ? $_GET["Bodytypes"] : "";
-$colorId = isset($_GET["Colors"]) ? $_GET["Colors"] : "";
-$enginecapacity = isset($_GET["Enginecapacity"]) ? $_GET["Enginecapacity"] : "";
-$hp = isset($_GET["Hp"]) ? $_GET["Hp"] : "";
-$fueltypeId = isset($_GET["Fueltypes"]) ? $_GET["Fueltypes"] : "";
-$mileage = isset($_GET["Mileage"]) ? $_GET["Mileage"] : "";
-$gearboxtypeId = isset($_GET["Gearboxtypes"]) ? $_GET["Gearboxtypes"] : "";
-$transmissionId = isset($_GET["Transmissions"]) ? $_GET["Transmissions"] : "";
-$price = isset($_GET["Price"]) ? $_GET["Price"] : "";
-$description = isset($_GET["Description"]) ? $_GET["Description"] : "";
 
-
-
-
-
-
-//Working with DB
 if($action != ""){
+    $id = isset($_GET["Id"]) ? $_GET["Id"] : "";
+    $tableName = isset($_GET["TableName"]) ? $_GET["TableName"] : "";
+    $name = isset($_GET["Name"]) ? $_GET["Name"] : "";
+    $brandId= isset($_GET["Brands"]) ? $_GET["Brands"] : "";
+    $surName = isset($_GET["Surname"]) ? $_GET["Surname"] : "";
+    $email = isset($_GET["Email"]) ? $_GET["Email"] : "";
+    $pass = isset($_GET["Password"]) ? $_GET["Password"] : "";
+    $roleId = isset($_GET["Roles"]) ? $_GET["Roles"] : "";
+    $title = isset($_GET["Title"]) ? $_GET["Title"] : "";
+    $isActive = isset($_GET["Isactive"]) ? $_GET["Isactive"] : "";
+    $cityId = isset($_GET["Cities"]) ? $_GET["Cities"] : "";
+    $modelId = isset($_GET["Models"]) ? $_GET["Models"] : "";
+    $year = isset($_GET["Year"]) ? $_GET["Year"] : "";
+    $bodytypeId = isset($_GET["Bodytypes"]) ? $_GET["Bodytypes"] : "";
+    $colorId = isset($_GET["Colors"]) ? $_GET["Colors"] : "";
+    $enginecapacity = isset($_GET["Enginecapacity"]) ? $_GET["Enginecapacity"] : "";
+    $hp = isset($_GET["Hp"]) ? $_GET["Hp"] : "";
+    $fueltypeId = isset($_GET["Fueltypes"]) ? $_GET["Fueltypes"] : "";
+    $mileage = isset($_GET["Mileage"]) ? $_GET["Mileage"] : "";
+    $gearboxtypeId = isset($_GET["Gearboxtypes"]) ? $_GET["Gearboxtypes"] : "";
+    $transmissionId = isset($_GET["Transmissions"]) ? $_GET["Transmissions"] : "";
+    $price = isset($_GET["Price"]) ? $_GET["Price"] : "";
+    $description = isset($_GET["Description"]) ? $_GET["Description"] : "";
+
+
+
+    //Working with DB
     switch($action){
         case "Add":
-            if($tableName == "BodyTypes")  GenericInsertOnlyOneColumn("body_type", $name);
-            elseif($tableName == "Brands") GenericInsertOnlyOneColumn("brand", $name);
-            elseif($tableName == "Cities") GenericInsertOnlyOneColumn("city", $name);
-            elseif($tableName == "Colors") GenericInsertOnlyOneColumn("color", $name);
-            elseif($tableName == "FuelTypes") GenericInsertOnlyOneColumn("fuel_type", $name);
-            elseif($tableName == "GearboxTypes") GenericInsertOnlyOneColumn("gearbox_type", $name);
-            elseif($tableName == "Roles") GenericInsertOnlyOneColumn("role", $name);
-            elseif($tableName == "Transmissions") GenericInsertOnlyOneColumn("transmission", $name);
-            elseif($tableName == "Models") InsertModel($name, $brandId);
-            elseif($tableName == "Users") InsertUser($name, $surName, $email,$pass,$roleId);
-            elseif($tableName == "Cars") InsertCar(1,$title,$cityId,$modelId,$year,$bodytypeId,$colorId,
+            if($tableName == "model") InsertModel($name, $brandId);
+            elseif($tableName == "user") InsertUser($name, $surName, $email,$pass,$roleId);
+            elseif($tableName == "car") InsertCar(1,$title,$cityId,$modelId,$year,$bodytypeId,$colorId,
             $enginecapacity,$hp,$fueltypeId,$mileage,$gearboxtypeId,$transmissionId,$price,$description);
+            else GenericInsertOnlyOneColumn($tableName,$name);
+        break;
+
+        case "Del":
+            GenericDeleteById($tableName,$id);
+            
         break;
     }
+
 }
 
 
-//$getAllBodyTypes = GetAllBodyTypes();           //ADD+
-//$getAllBrands = GetAllBrands();                 //ADD+
-//$getAllCars = GetAllCars();                     //ADD+
-//$getAllCities = GetAllCities();                 //ADD+
-//$getAllColors = GetAllColors();                 //ADD+
-//$getAllFuelTypes = GetAllFuelTypes();           //ADD+
-//$getAllGearboxTypes = GetAllGearboxTypes();     //ADD+
-//$getAllModels = GetAllModels();                 //ADD+
-//$getAllRoles = GetAllRoles();                   //ADD+
-//$getAllTransmissions = GetAllTransmissions();   //ADD+
-//$getAllUsers = GetAllUsers();                   //ADD+
+$getAllBodyTypes = GetAllBodyTypes();           //ADD+ //DEL+
+$getAllBrands = GetAllBrands();                 //ADD+ //DEL+
+$getAllCars = GetAllCars();                     //ADD+ //DEL+
+$getAllCities = GetAllCities();                 //ADD+ //DEL+
+$getAllColors = GetAllColors();                 //ADD+ //DEL+
+$getAllFuelTypes = GetAllFuelTypes();           //ADD+ //DEL+
+$getAllGearboxTypes = GetAllGearboxTypes();     //ADD+ //DEL+
+$getAllModels = GetAllModels();                 //ADD+ //DEL+
+$getAllRoles = GetAllRoles();                   //ADD+ //DEL+
+$getAllTransmissions = GetAllTransmissions();   //ADD+ //DEL+
+$getAllUsers = GetAllUsers();                   //ADD+ //DEL+
 
 
 
 //Call Functions with Table Name
-//ShowTables($getAllBodyTypes, "BodyTypes");
-//ShowTables($getAllBrands, "Brands");
-ShowTables($getAllCars, "Cars");
-//ShowTables($getAllCities, "Cities");
-//ShowTables($getAllColors, "Colors");
-//ShowTables($getAllFuelTypes, "FuelTypes");
-//ShowTables($getAllGearboxTypes, "GearboxTypes");
-//ShowTables($getAllModels, "Models");
-//ShowTables($getAllRoles, "Roles");
-//ShowTables($getAllTransmissions, "Transmissions");
-//ShowTables($getAllUsers, "Users");
+ShowTables($getAllBodyTypes, "body_type");
+ShowTables($getAllBrands, "brand");
+ShowTables($getAllCars, "car");
+ShowTables($getAllCities, "city");
+ShowTables($getAllColors, "color");
+ShowTables($getAllFuelTypes, "fuel_type");
+ShowTables($getAllGearboxTypes, "gearbox_type");
+ShowTables($getAllModels, "model");
+ShowTables($getAllRoles, "role");
+ShowTables($getAllTransmissions, "transmission");
+ShowTables($getAllUsers, "user");
 
 
 
@@ -123,7 +121,8 @@ function ShowTables($arrayAssoc, $tableName)
 
     <div class="m-3 mb-4 p-2 shadow-sm border rounded">
         
-        <a style="text-decoration: none;" class="display-4 btn-block mb-2" data-toggle="collapse" href="#<?= $tableName ?>"><?=$tableName?><i class="fas fa-arrows-alt-v fa-xs text-dark mt-3" style="float:right;"></i></a>
+        <a style="text-decoration: none;" class="display-4 btn-block mb-2" data-toggle="collapse" href="#<?= $tableName ?>">
+        <?=ucfirst($tableName)?><i class="fas fa-arrows-alt-v fa-xs text-dark mt-3" style="float:right;"></i></a>
         
 
         <div class="row">
@@ -133,7 +132,7 @@ function ShowTables($arrayAssoc, $tableName)
                     <div class="card card-body">
 
                         <div class="table-responsive">
-                           <form>
+                           
                             <table class="table table-striped table-sm  table-hover text-center">
 
                                 <thead class="thead-dark">
@@ -161,20 +160,26 @@ function ShowTables($arrayAssoc, $tableName)
                                     $TempAssArrLength = count($arrayAssoc);
                                     foreach ($arrayAssoc as $index => $array) {
 
-                                        echo "<tr>";
+                                        echo "<form><tr>";
                                         foreach ($array as $Key => $Value) {
                                             echo "<td>$Value</td>";
+
+                                            if(ucfirst($Key)=="Id"){
+                                                echo '<input name= "Id" type="hidden" value="' . $Value .'">';
+                                            }
                                         }
 
                                         echo '<td>
-                                        <div class="btn-group btn-group-sm" role="group">
-                                            <a class="btn btn-info btn-sm" href="#"><i class="far fa-edit"></i></a>
-                                            <a class="btn btn-danger btn-sm" href="#"><i class="fas fa-trash"></i></a>
-                                        </div>
-                                    </td>';
+                                                <div class="btn-group btn-group-sm" role="group">
+                                                    <input name= "TableName" type="hidden" value="' . $tableName .'">
+                                                    <input name= "Action"    type="hidden" value="Del" >
+                                                    <button type="submit" class="btn btn-info   btn-sm"><i class="far fa-edit"></i></button>
+                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
+                                                </div>
+                                            </td>';
 
 
-                                        echo "</tr>";
+                                        echo "</tr></form>";
 
 
 
@@ -183,7 +188,7 @@ function ShowTables($arrayAssoc, $tableName)
                                         // Foreach last iteration
                                         if (!--$TempAssArrLength) {
 
-                                            echo "<tr>";
+                                            echo "<form><tr>";
 
                                             foreach ($array as $Key => $Value) {
 
@@ -232,7 +237,7 @@ function ShowTables($arrayAssoc, $tableName)
                                             <input type="submit" value="Add" style="width: 65px;" class="btn btn-primary">';
 
 
-                                            echo "</tr>";
+                                            echo "</tr></form>";
                                         }
                                     }
 
@@ -242,7 +247,7 @@ function ShowTables($arrayAssoc, $tableName)
                                 </tbody>
 
                             </table>
-                        </form>
+                        
                         </div>
                     </div>
                 </div>

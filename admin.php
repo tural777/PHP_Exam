@@ -45,22 +45,29 @@ $surName = isset($_GET["Surname"]) ? $_GET["Surname"] : "";
 $email = isset($_GET["Email"]) ? $_GET["Email"] : "";
 $pass = isset($_GET["Password"]) ? $_GET["Password"] : "";
 $roleId = isset($_GET["Roles"]) ? $_GET["Roles"] : "";
+$title = isset($_GET["Title"]) ? $_GET["Title"] : "";
+$isActive = isset($_GET["Isactive"]) ? $_GET["Isactive"] : "";
+$cityId = isset($_GET["Cities"]) ? $_GET["Cities"] : "";
+$modelId = isset($_GET["Models"]) ? $_GET["Models"] : "";
+$year = isset($_GET["Year"]) ? $_GET["Year"] : "";
+$bodytypeId = isset($_GET["Bodytypes"]) ? $_GET["Bodytypes"] : "";
+$colorId = isset($_GET["Colors"]) ? $_GET["Colors"] : "";
+$enginecapacity = isset($_GET["Enginecapacity"]) ? $_GET["Enginecapacity"] : "";
+$hp = isset($_GET["Hp"]) ? $_GET["Hp"] : "";
+$fueltypeId = isset($_GET["Fueltypes"]) ? $_GET["Fueltypes"] : "";
+$mileage = isset($_GET["Mileage"]) ? $_GET["Mileage"] : "";
+$gearboxtypeId = isset($_GET["Gearboxtypes"]) ? $_GET["Gearboxtypes"] : "";
+$transmissionId = isset($_GET["Transmissions"]) ? $_GET["Transmissions"] : "";
+$price = isset($_GET["Price"]) ? $_GET["Price"] : "";
+$description = isset($_GET["Description"]) ? $_GET["Description"] : "";
 
 
-//Testing
-echo "<br>Action: " . $action;
-echo "<br>TableName: " . $tableName;
-echo "<br>Name: " . $name;
-echo "<br>BrandId: " . $brandId;
-echo "<br>SurName: " . $surName;
-echo "<br>Email: " . $email;
-echo "<br>Pass: " . $pass;
-echo "<br>RoleId: " . $roleId;
+
 
 
 
 //Working with DB
-if($name != ""){
+if($action != ""){
     switch($action){
         case "Add":
             if($tableName == "BodyTypes")  GenericInsertOnlyOneColumn("body_type", $name);
@@ -73,6 +80,8 @@ if($name != ""){
             elseif($tableName == "Transmissions") GenericInsertOnlyOneColumn("transmission", $name);
             elseif($tableName == "Models") InsertModel($name, $brandId);
             elseif($tableName == "Users") InsertUser($name, $surName, $email,$pass,$roleId);
+            elseif($tableName == "Cars") InsertCar(1,$title,$cityId,$modelId,$year,$bodytypeId,$colorId,
+            $enginecapacity,$hp,$fueltypeId,$mileage,$gearboxtypeId,$transmissionId,$price,$description);
         break;
     }
 }
@@ -80,7 +89,7 @@ if($name != ""){
 
 //$getAllBodyTypes = GetAllBodyTypes();           //ADD+
 //$getAllBrands = GetAllBrands();                 //ADD+
-//$getAllCars = GetAllCars();                     //ADD-
+//$getAllCars = GetAllCars();                     //ADD+
 //$getAllCities = GetAllCities();                 //ADD+
 //$getAllColors = GetAllColors();                 //ADD+
 //$getAllFuelTypes = GetAllFuelTypes();           //ADD+
@@ -88,14 +97,14 @@ if($name != ""){
 //$getAllModels = GetAllModels();                 //ADD+
 //$getAllRoles = GetAllRoles();                   //ADD+
 //$getAllTransmissions = GetAllTransmissions();   //ADD+
-$getAllUsers = GetAllUsers();                   //ADD+
+//$getAllUsers = GetAllUsers();                   //ADD+
 
 
 
 //Call Functions with Table Name
 //ShowTables($getAllBodyTypes, "BodyTypes");
 //ShowTables($getAllBrands, "Brands");
-//ShowTables($getAllCars, "Cars");
+ShowTables($getAllCars, "Cars");
 //ShowTables($getAllCities, "Cities");
 //ShowTables($getAllColors, "Colors");
 //ShowTables($getAllFuelTypes, "FuelTypes");
@@ -103,7 +112,7 @@ $getAllUsers = GetAllUsers();                   //ADD+
 //ShowTables($getAllModels, "Models");
 //ShowTables($getAllRoles, "Roles");
 //ShowTables($getAllTransmissions, "Transmissions");
-ShowTables($getAllUsers, "Users");
+//ShowTables($getAllUsers, "Users");
 
 
 

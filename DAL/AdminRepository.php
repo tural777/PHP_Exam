@@ -6,9 +6,9 @@ function GetAllCars()
     global $db_handle;
     
     $pg_query = pg_query($db_handle, "
-select distinct Car.Id,Title,IsActive,added,updated, City.Name as Cities,Brand.Name as Brand,model.Name as Model,
-Year,Body_type.Name as BodyType,Color.Name as Color,EngineCapacity,HP,Fuel_type.Name as FuelType,Mileage,
-Gearbox_type.Name as GearboxType,Transmission.Name as Transmission,Price,Description from car
+select  Car.Id,Title,IsActive,City.Name as Cities,Brand.Name as Brands,model.Name as Models,
+Year,Body_type.Name as BodyTypes,Color.Name as Colors,EngineCapacity,HP,Fuel_type.Name as FuelTypes,Mileage,
+Gearbox_type.Name as GearboxTypes,Transmission.Name as Transmissions,Price,Description from car
     left join \"user\" u on Car.User_Id = u.Id
     left join  city on Car.City_Id = city.Id
     left join  model on Car.Model_Id = model.Id
@@ -169,5 +169,18 @@ function InsertUser($name, $surname, $email, $password, $role_id)
     //$result = pg_fetch_row($pg_query);
     //return $result[0];
 }
+
+
+function InsertCar($user_id, $title ,$city_id, $model_id, $year, $body_type_id, $color_id, $engineCapacity, $HP, $fuel_type_id, $mileage, $gearbox_type_id, $transmission_id, $price, $description, $Images = null, $isActive = 0)
+{
+    global $db_handle;
+    $query = "insert into car (User_Id,Title, IsActive,City_Id,Model_Id, Year,Body_type_Id,Color_Id, EngineCapacity, HP,Fuel_type_Id, Mileage,Gearbox_type_Id,transmission_id, Price, Description)
+    values ('$user_id','$title','$isActive','$city_id','$model_id','$year','$body_type_id','$color_id','$engineCapacity','$HP','$fuel_type_id','$mileage','$gearbox_type_id','$transmission_id','$price','$description') RETURNING id;";
+    pg_query($db_handle, $query);
+    
+}
+
+
+
 
 ?>

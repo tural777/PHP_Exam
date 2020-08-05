@@ -23,19 +23,53 @@
 require "./DAL/AdminRepository.php";
 
 
-$getAllBodyTypes = GetAllBodyTypes();
-$getAllBrands = GetAllBrands();
-$getAllCars = GetAllCars();
-$getAllCities = GetAllCities();
-$getAllColors = GetAllColors();
-$getAllFuelTypes = GetAllFuelTypes();
-$getAllGearboxTypes = GetAllGearboxTypes();
-$getAllModels = GetAllModels();
-$getAllRoles = GetAllRoles();
-$getAllTransmissions = GetAllTransmissions();
-$getAllUsers = GetAllUsers();
+
+$action = isset($_GET["Action"]) ? $_GET["Action"] : "";
+$tableName = isset($_GET["TableName"]) ? $_GET["TableName"] : "";
+$name = isset($_GET["Name"]) ? $_GET["Name"] : "";
+//$brandId= isset($_GET["BrandId"]) ? $_GET["BrandId"] : "";
 
 
+//Testing
+//echo "Action: " . $action;
+//echo "TableName: " . $tableName;
+//echo "Name: " . $name;
+//echo "BrandId: " . $brandId;
+
+
+
+//Working with DB
+switch($action){
+    case "Add":
+        if($tableName == "BodyTypes")  GenericInsertOnlyOneColumn("body_type", $name);
+        elseif($tableName == "Brands") GenericInsertOnlyOneColumn("brand", $name);
+        elseif($tableName == "Cities") GenericInsertOnlyOneColumn("city", $name);
+        elseif($tableName == "Colors") GenericInsertOnlyOneColumn("color", $name);
+        elseif($tableName == "FuelTypes") GenericInsertOnlyOneColumn("fuel_type", $name);
+        elseif($tableName == "GearboxTypes") GenericInsertOnlyOneColumn("gearbox_type", $name);
+        elseif($tableName == "Roles") GenericInsertOnlyOneColumn("role", $name);
+        elseif($tableName == "Transmissions") GenericInsertOnlyOneColumn("transmission", $name);
+        //elseif($tableName == "Models") InsertModel("model", $name, $brandId);
+    break;
+}
+
+
+
+$getAllBodyTypes = GetAllBodyTypes();           //+
+$getAllBrands = GetAllBrands();                 //+
+$getAllCars = GetAllCars();                     //-
+$getAllCities = GetAllCities();                 //+
+$getAllColors = GetAllColors();                 //+
+$getAllFuelTypes = GetAllFuelTypes();           //+
+$getAllGearboxTypes = GetAllGearboxTypes();     //+
+$getAllModels = GetAllModels();                 //-
+$getAllRoles = GetAllRoles();                   //+
+$getAllTransmissions = GetAllTransmissions();   //+
+$getAllUsers = GetAllUsers();                   //-
+
+
+
+//Call Functions with Table Name
 ShowTables($getAllBodyTypes, "BodyTypes");
 ShowTables($getAllBrands, "Brands");
 ShowTables($getAllCars, "Cars");
@@ -55,9 +89,9 @@ function ShowTables($arrayAssoc, $tableName)
 ?>
 
 
-    <div class="m-3 p-1 shadow-sm border border-warning rounded">
+    <div class="m-3 mb-4 p-2 shadow-sm border rounded">
         
-        <a style="text-decoration: none;" class="display-4 btn-block" data-toggle="collapse" href="#<?= $tableName ?>"><?=$tableName?></a>
+        <a style="text-decoration: none;" class="display-4 btn-block mb-2" data-toggle="collapse" href="#<?= $tableName ?>"><?=$tableName?><i class="fas fa-arrows-alt-v fa-xs text-dark mt-3" style="float:right;"></i></a>
         
 
         <div class="row">
@@ -116,15 +150,14 @@ function ShowTables($arrayAssoc, $tableName)
                                         // Foreach last iteration
                                         if (!--$TempAssArrLength) {
 
-                                            echo "<tr>";
+                                            echo "<tr><form>";
 
                                             foreach ($array as $Key => $Value) {
 
                                                 echo '<td>';
 
                                                 if (function_exists("GetAll" . ucfirst($Key) . "s") || function_exists("GetAll" . ucfirst($Key))) {
-                                                    echo '<select class="form-control">
-                                                        <option selected disabled>' . ucfirst($Key) . '</option>';
+                                                    echo '<select name="' . ucfirst($Key) . '" class="form-control">';
 
                                                         $TempAddFuncForAdmin = "GetAll" . ucfirst($Key);
 
@@ -143,7 +176,7 @@ function ShowTables($arrayAssoc, $tableName)
 
                                                     echo '</select>';
                                                 } elseif (ucfirst($Key) == "Id") {
-                                                    echo '<input readonly class="form-control" placeholder="' . ucfirst($Key) . '">';
+                                                    echo '<input name="' . ucfirst($Key) . '" readonly class="form-control" placeholder="' . ucfirst($Key) . '">';
                                                 }
                                                 //elseif (ucfirst($Key) == "Img_path") {
                                                 //     echo    '<div class="form-group"><label class="form-control" for="file-upload" style="border: 1px solid #ccc; display: inline-block; padding: 6px 12px; cursor: pointer;">
@@ -152,18 +185,18 @@ function ShowTables($arrayAssoc, $tableName)
                                                 //             <input  id="file-upload" style="display: none;" type="file" multiple/></div>';
                                                 // } 
                                                 else {
-                                                    echo '<input class="form-control" placeholder="' . ucfirst($Key) . '">';
+                                                    echo '<input name="' . ucfirst($Key) . '" class="form-control" placeholder="' . ucfirst($Key) . '">';
                                                 }
                                                 echo '</td>';
                                             }
 
-                                            echo '<td>
-                                                    <a class="btn btn-primary btn-sm" style="width: 65px; height:37px;" href="#">
-                                                        <i class="fas fa-plus-circle fa-lg pt-2"></i></a>
-                                            </td>';
+                                            echo    '<td>
+                                            <input value="' . $tableName .'" name="TableName" type="hidden">
+                                            <input value="Add" name="Action" type="hidden">
+                                            <input type="submit" value="Add" style="width: 65px;" class="btn btn-primary">';
 
 
-                                            echo "</tr>";
+                                            echo "</form></tr>";
                                         }
                                     }
 
@@ -174,15 +207,11 @@ function ShowTables($arrayAssoc, $tableName)
 
                             </table>
                         </div>
-
                     </div>
                 </div>
             </div>
-
         </div>
-
     </div>
-
 
 
 

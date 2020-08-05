@@ -93,7 +93,13 @@ function GetAllModels()
 {
     global $db_handle;
 
-    $pg_query = pg_query($db_handle, "SELECT * FROM model;");
+    $pg_query = pg_query($db_handle, "SELECT
+	Model.Id,
+	Model.Name,
+	Brand.Name as Brands
+FROM
+	Model
+LEFT JOIN Brand ON Model.brand_id = Brand.id;");
 
     return pg_fetch_all($pg_query, PGSQL_ASSOC);
 }
@@ -126,6 +132,31 @@ function GetAllRoles()
     $pg_query = pg_query($db_handle, "SELECT * FROM role;");
 
     return pg_fetch_all($pg_query, PGSQL_ASSOC);
+}
+
+
+
+
+function GenericInsertOnlyOneColumn($table, $value)
+{
+    global $db_handle;
+
+    $query = "insert into $table (name)
+    values ('$value')";
+    
+    pg_query($db_handle, $query);
+}
+
+
+
+function InsertModel($name, $brandId)
+{
+    global $db_handle;
+
+    $query = "insert into model (name, brand_id)
+    values ('$name', $brandId)";
+    
+    pg_query($db_handle, $query);
 }
 
 

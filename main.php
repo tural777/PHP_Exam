@@ -12,45 +12,45 @@ $year_max = isset($_POST["year-max"]) ? $_POST["year-max"] : "";
 $city_id = isset($_POST["city-id"]) ? $_POST["city-id"] : "";
 $color_id = isset($_POST["color-id"]) ? $_POST["color-id"] : "";
 
-if($model_id != "" || $price_min != "" || $price_max != "" || $year_min != "" || $year_max != "" || $city_id != "" || $color_id != "") $has_filter = true;
+if ($model_id != "" || $price_min != "" || $price_max != "" || $year_min != "" || $year_max != "" || $city_id != "" || $color_id != "") $has_filter = true;
 
-if($has_filter) $filter = "where ";
+if ($has_filter) $filter = "where ";
 
-if($model_id != "") {
+if ($model_id != "") {
     $filter .= "model_id = " . $model_id;
     $isFirstFilter = false;
 }
 
-if($price_min != "") {
-    if(!$isFirstFilter) $filter .= " and ";
+if ($price_min != "") {
+    if (!$isFirstFilter) $filter .= " and ";
     $filter .= "price >= " . $price_min . "::money ";
     $isFirstFilter = false;
 }
 
-if($price_max != "") {
-    if(!$isFirstFilter) $filter .= " and ";
+if ($price_max != "") {
+    if (!$isFirstFilter) $filter .= " and ";
     $filter .= "price <= " . $price_max . "::money";
     $isFirstFilter = false;
 }
 
-if($year_min != "") {
-    if(!$isFirstFilter) $filter .= " and ";
-    $filter .= "year >= " . $year_min ;
+if ($year_min != "") {
+    if (!$isFirstFilter) $filter .= " and ";
+    $filter .= "year >= " . $year_min;
     $isFirstFilter = false;
 }
-if($year_max != "") {
-    if(!$isFirstFilter) $filter .= " and ";
-    $filter .= "year <= " . $year_max ;
+if ($year_max != "") {
+    if (!$isFirstFilter) $filter .= " and ";
+    $filter .= "year <= " . $year_max;
     $isFirstFilter = false;
 }
-if($city_id != "") {
-    if(!$isFirstFilter) $filter .= " and ";
-    $filter .= "city_id = " .$city_id ;
+if ($city_id != "") {
+    if (!$isFirstFilter) $filter .= " and ";
+    $filter .= "city_id = " . $city_id;
     $isFirstFilter = false;
 }
-if($color_id != "") {
-    if(!$isFirstFilter) $filter .= " and ";
-    $filter .= "color_id = " .$color_id ;
+if ($color_id != "") {
+    if (!$isFirstFilter) $filter .= " and ";
+    $filter .= "color_id = " . $color_id;
     $isFirstFilter = false;
 }
 
@@ -181,10 +181,10 @@ if($color_id != "") {
                     $addeddate = "added";
 
                     $cars = GetAllCarsWithFilter($filter);
+                    if ($cars != null) {
+                        foreach ($cars as $count => $array) {
 
-                    foreach ($cars as $count => $array) {
-
-                        echo "<div class='col-lg-4'>
+                            echo "<div class='col-lg-4'>
                             <div class='product-slide_item'>
                                 <div class='inner-slide'>
                                     <div class='single-product'>
@@ -212,6 +212,7 @@ if($color_id != "") {
                             </div>
                             
                         </div>";
+                        }
                     }
 
                     ?>

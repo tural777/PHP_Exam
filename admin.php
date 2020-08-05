@@ -1,3 +1,16 @@
+<?php
+//session_start();
+//session_regenerate_id();
+//    if (isset($_SESSION['auth'])) {
+//        if($_SESSION['auth']['role'] != 'Admin')
+//        header("Location: index.php?page=login-register");
+//    }else{
+//        header("Location: index.php?page=login-register");
+//    }
+require_once "./DAL/DbConnection.php";
+$db_handle = pg_connect($CONN_STRING);
+require_once "./DAL/AdminRepository.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,7 +31,9 @@
 
 
 
+
     <?php
+
 
     require "./DAL/AdminRepository.php";
 

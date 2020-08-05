@@ -1,7 +1,43 @@
 <?php
+session_start();
+session_regenerate_id();
 
-// require "./DAL/CarRepository.php";
-// require "./DAL/UserRepository.php";
+ 
+//repo
+require_once "./DAL/DbConnection.php";
+$db_handle = pg_connect($CONN_STRING);
+//require_once "./DAL/AdminRepository.php";
+require_once "./DAL/BodyTypeRepository.php";
+require_once "./DAL/BrandRepository.php";
+require_once "./DAL/CarImgRepository.php";
+require_once "./DAL/CarRepository.php";
+require_once "./DAL/CityRepository.php";
+require_once "./DAL/ColorRepository.php";
+require_once "./DAL/FuelTypeRepository.php";
+require_once "./DAL/GearboxTypeRepository.php";
+require_once "./DAL/ModelRepository.php";
+require_once "./DAL/RoleRepository.php";
+require_once "./DAL/TransmissionRepository.php";
+require_once "./DAL/UserRepository.php";
+//
+
+
+include "login-register-post.php";
+
+
+
+$isAuthenticate = isset($_SESSION['auth']);
+
+if (isset($_GET['page'])) {
+    if ($_GET['page'] == 'login-register') {
+        if ($isAuthenticate) {
+            echo 'login-register';
+            header("Location: ?page=main");
+            exit;
+        }
+    }
+}
+
 
 
 // url
@@ -38,3 +74,6 @@ if (!file_exists($page)) $page = "404.php";
 include "header.php";
 include $page;
 include "footer.php";
+//Repo
+pg_close($db_handle);
+//

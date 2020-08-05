@@ -40,59 +40,60 @@ require_once "./DAL/AdminRepository.php";
 $action = isset($_GET["Action"]) ? $_GET["Action"] : "";
 $tableName = isset($_GET["TableName"]) ? $_GET["TableName"] : "";
 $name = isset($_GET["Name"]) ? $_GET["Name"] : "";
-//$brandId= isset($_GET["BrandId"]) ? $_GET["BrandId"] : "";
+$brandId= isset($_GET["Brands"]) ? $_GET["Brands"] : "";
 
 
 //Testing
-//echo "Action: " . $action;
-//echo "TableName: " . $tableName;
-//echo "Name: " . $name;
-//echo "BrandId: " . $brandId;
+echo "Action: " . $action;
+echo "TableName: " . $tableName;
+echo "Name: " . $name;
+echo "BrandId: " . $brandId;
 
 
 
 //Working with DB
-switch($action){
-    case "Add":
-        if($tableName == "BodyTypes")  GenericInsertOnlyOneColumn("body_type", $name);
-        elseif($tableName == "Brands") GenericInsertOnlyOneColumn("brand", $name);
-        elseif($tableName == "Cities") GenericInsertOnlyOneColumn("city", $name);
-        elseif($tableName == "Colors") GenericInsertOnlyOneColumn("color", $name);
-        elseif($tableName == "FuelTypes") GenericInsertOnlyOneColumn("fuel_type", $name);
-        elseif($tableName == "GearboxTypes") GenericInsertOnlyOneColumn("gearbox_type", $name);
-        elseif($tableName == "Roles") GenericInsertOnlyOneColumn("role", $name);
-        elseif($tableName == "Transmissions") GenericInsertOnlyOneColumn("transmission", $name);
-        //elseif($tableName == "Models") InsertModel("model", $name, $brandId);
-    break;
+if($name != ""){
+    switch($action){
+        case "Add":
+            if($tableName == "BodyTypes")  GenericInsertOnlyOneColumn("body_type", $name);
+            elseif($tableName == "Brands") GenericInsertOnlyOneColumn("brand", $name);
+            elseif($tableName == "Cities") GenericInsertOnlyOneColumn("city", $name);
+            elseif($tableName == "Colors") GenericInsertOnlyOneColumn("color", $name);
+            elseif($tableName == "FuelTypes") GenericInsertOnlyOneColumn("fuel_type", $name);
+            elseif($tableName == "GearboxTypes") GenericInsertOnlyOneColumn("gearbox_type", $name);
+            elseif($tableName == "Roles") GenericInsertOnlyOneColumn("role", $name);
+            elseif($tableName == "Transmissions") GenericInsertOnlyOneColumn("transmission", $name);
+            elseif($tableName == "Models") InsertModel($name, $brandId);
+        break;
+    }
 }
 
 
-
-$getAllBodyTypes = GetAllBodyTypes();           //ADD+
-$getAllBrands = GetAllBrands();                 //ADD+
+//$getAllBodyTypes = GetAllBodyTypes();           //ADD+
+//$getAllBrands = GetAllBrands();                 //ADD+
 //$getAllCars = GetAllCars();                     //ADD-
-$getAllCities = GetAllCities();                 //ADD+
-$getAllColors = GetAllColors();                 //ADD+
-$getAllFuelTypes = GetAllFuelTypes();           //ADD+
-$getAllGearboxTypes = GetAllGearboxTypes();     //ADD+
-$getAllModels = GetAllModels();                 //ADD-
-$getAllRoles = GetAllRoles();                   //ADD+
-$getAllTransmissions = GetAllTransmissions();   //ADD+
+//$getAllCities = GetAllCities();                 //ADD+
+//$getAllColors = GetAllColors();                 //ADD+
+//$getAllFuelTypes = GetAllFuelTypes();           //ADD+
+//$getAllGearboxTypes = GetAllGearboxTypes();     //ADD+
+//$getAllModels = GetAllModels();                 //ADD+
+//$getAllRoles = GetAllRoles();                   //ADD+
+//$getAllTransmissions = GetAllTransmissions();   //ADD+
 $getAllUsers = GetAllUsers();                   //ADD-
 
 
 
 //Call Functions with Table Name
-ShowTables($getAllBodyTypes, "BodyTypes");
-ShowTables($getAllBrands, "Brands");
+//ShowTables($getAllBodyTypes, "BodyTypes");
+//ShowTables($getAllBrands, "Brands");
 //ShowTables($getAllCars, "Cars");
-ShowTables($getAllCities, "Cities");
-ShowTables($getAllColors, "Colors");
-ShowTables($getAllFuelTypes, "FuelTypes");
-ShowTables($getAllGearboxTypes, "GearboxTypes");
-ShowTables($getAllModels, "Models");
-ShowTables($getAllRoles, "Roles");
-ShowTables($getAllTransmissions, "Transmissions");
+//ShowTables($getAllCities, "Cities");
+//ShowTables($getAllColors, "Colors");
+//ShowTables($getAllFuelTypes, "FuelTypes");
+//ShowTables($getAllGearboxTypes, "GearboxTypes");
+//ShowTables($getAllModels, "Models");
+//ShowTables($getAllRoles, "Roles");
+//ShowTables($getAllTransmissions, "Transmissions");
 ShowTables($getAllUsers, "Users");
 
 
@@ -114,6 +115,7 @@ function ShowTables($arrayAssoc, $tableName)
                     <div class="card card-body">
 
                         <div class="table-responsive">
+                           <form>
                             <table class="table table-striped table-sm  table-hover text-center">
 
                                 <thead class="thead-dark">
@@ -163,7 +165,7 @@ function ShowTables($arrayAssoc, $tableName)
                                         // Foreach last iteration
                                         if (!--$TempAssArrLength) {
 
-                                            echo "<tr><form>";
+                                            echo "<tr>";
 
                                             foreach ($array as $Key => $Value) {
 
@@ -181,15 +183,18 @@ function ShowTables($arrayAssoc, $tableName)
 
                                                     foreach ($TempAddFuncForAdmin() as $index => $array) {
                                                         foreach ($array as $Key => $Value) {
-                                                            if (ucfirst($Key) == "Name")
-                                                                echo '<option> ' . $Value . '</option>';
+                                                            if (ucfirst($Key) == "Id")
+                                                                echo '<option value="'.$Value.'">';
+                                                            elseif(ucfirst($Key) == "Name")
+                                                                echo $Value.'</option>';
+                                                           
                                                         }
                                                     }
 
 
                                                     echo '</select>';
                                                 } elseif (ucfirst($Key) == "Id") {
-                                                    echo '<input name="' . ucfirst($Key) . '" readonly class="form-control" placeholder="' . ucfirst($Key) . '">';
+                                                    echo '<input disabled class="form-control" placeholder="' . ucfirst($Key) . '">';
                                                 }
                                                 //elseif (ucfirst($Key) == "Img_path") {
                                                 //     echo    '<div class="form-group"><label class="form-control" for="file-upload" style="border: 1px solid #ccc; display: inline-block; padding: 6px 12px; cursor: pointer;">
@@ -209,7 +214,7 @@ function ShowTables($arrayAssoc, $tableName)
                                             <input type="submit" value="Add" style="width: 65px;" class="btn btn-primary">';
 
 
-                                            echo "</form></tr>";
+                                            echo "</tr>";
                                         }
                                     }
 
@@ -219,6 +224,7 @@ function ShowTables($arrayAssoc, $tableName)
                                 </tbody>
 
                             </table>
+                        </form>
                         </div>
                     </div>
                 </div>

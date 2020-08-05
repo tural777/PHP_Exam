@@ -2,6 +2,7 @@
 session_start();
 session_regenerate_id();
 
+ 
 //repo
 require_once "./DAL/DbConnection.php";
 $db_handle = pg_connect($CONN_STRING);
@@ -36,6 +37,7 @@ if (isset($_GET['page'])) {
         }
     }
 }
+
 
 
 // url

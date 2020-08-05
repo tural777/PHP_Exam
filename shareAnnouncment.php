@@ -1,27 +1,15 @@
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-   <script>
-       var car = {
-           brand: '',
-           model: ''
-       }
-
-       function handleSubmit() {
-           console.log("aue");
-       }
-   </script>
-
-
 
    <body>
 
        <?php
 
-        require './DAL/CarRepository.php';
-        require './DAL/ModelRepository.php';
-        require './DAL/BodyTypeRepository.php';
-        require './DAL/FuelTypeRepository.php';
-        require './DAL/TransmissionRepository.php';
-        require './DAL/GearboxTypeRepository.php';
+        // require './DAL/CarRepository.php';
+        // require './DAL/ModelRepository.php';
+        // require './DAL/BodyTypeRepository.php';
+        // require './DAL/FuelTypeRepository.php';
+        // require './DAL/TransmissionRepository.php';
+        // require './DAL/GearboxTypeRepository.php';
         //require './DAL/CityRepository.php';
 
 
@@ -49,14 +37,7 @@
         $enginePower = isset($_GET["enginePower"]) ? $_GET["enginePower"] : "";
 
 
-        echo "<h1>" . $brand . "</h1></br>";
-        echo $model . "</br>";
-        echo $banType . "</br>";
-        echo $mileage . "</br>";
-        echo $price . "</br>";
-        echo $fuelType . "</br>";
-
-        InsertCar(1, 1, 1, $year, 1, 1, $engineCapacity, $enginePower, 1, $mileage, 1, 1, $price, "au");
+        // InsertCar(1, 1, 1, $year, 1, 1, $engineCapacity, $enginePower, 1, $mileage, 1, 1, $price, "au");
 
 
         ?>

@@ -104,7 +104,7 @@
                                         </a>
                                     </li>
                                     <li class="contact-us_wrap">
-                                        <a href="#"><i class="fas fa-plus-circle"></i>Elan yerləşdir</a>
+                                        <a href="?page=shareAnnouncment"><i class="fas fa-plus-circle"></i>Elan yerləşdir</a>
                                     </li>
                                 </ul>
                             </div>
@@ -167,15 +167,16 @@
                                                     <div class="module-list_item">
                                                         <select class="form-control" name="model-id" id="models">
                                                             <option value="" selected>All</option>
-<!--                                                            --><?php
-//                                                            if (isset($_GET['brandId'])) {
-//                                                                include "./DAL/ModelRepository.php";
-//                                                                $models = GetModelsByBrandId($_GET['brandId']);
-//                                                                foreach ($models as $model) {
-//                                                                    echo "<option value='$model[id]'>$model[name]</option>";
-//                                                                }
-//                                                            }
-//                                                            ?>
+                                                            <!--                                                            --><?php
+                                                                                                                                //                                                            if (isset($_GET['brandId'])) {
+                                                                                                                                //                                                                include "./DAL/ModelRepository.php";
+                                                                                                                                //                                                                $models = GetModelsByBrandId($_GET['brandId']);
+                                                                                                                                //                                                                foreach ($models as $model) {
+                                                                                                                                //                                                                    echo "<option value='$model[id]'>$model[name]</option>";
+                                                                                                                                //                                                                }
+                                                                                                                                //                                                            }
+                                                                                                                                //                                                            
+                                                                                                                                ?>
                                                         </select>
 
                                                     </div>

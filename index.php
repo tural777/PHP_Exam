@@ -1,7 +1,7 @@
 <?php
 
-require "./DAL/CarRepository.php";
-require "./DAL/UserRepository.php";
+// require "./DAL/CarRepository.php";
+// require "./DAL/UserRepository.php";
 
 
 // url

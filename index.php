@@ -1,11 +1,29 @@
 <?php
 session_start();
 session_regenerate_id();
-require "./DAL/UserRepository.php";
-require "./DAL/CarRepository.php";
-require "./DAL/RoleRepository.php";
+
+//repo
+$CONN_STRING ="host='134.122.72.17' port='5432' dbname='phpstepproject' user='phpstepproject' password='phpstepproject'";
+$db_handle = pg_connect($CONN_STRING);
+//require_once "./DAL/AdminRepository.php";
+require_once "./DAL/BodyTypeRepository.php";
+require_once "./DAL/BrandRepository.php";
+require_once "./DAL/CarImgRepository.php";
+require_once "./DAL/CarRepository.php";
+require_once "./DAL/CityRepository.php";
+require_once "./DAL/ColorRepository.php";
+require_once "./DAL/FuelTypeRepository.php";
+require_once "./DAL/GearboxTypeRepository.php";
+require_once "./DAL/ModelRepository.php";
+require_once "./DAL/RoleRepository.php";
+require_once "./DAL/TransmissionRepository.php";
+require_once "./DAL/UserRepository.php";
+//
+
 
 include "login-register-post.php";
+
+
 
 $isAuthenticate = isset($_SESSION['auth']);
 
@@ -18,16 +36,6 @@ if (isset($_GET['page'])) {
         }
     }
 }
-
-//session_start();
-//    if (isset($_SESSION['auth'])) {
-//        if($_SESSION['auth']['role'] != 'Admin')
-//        header("Location: ?page=login-register");
-//    }else{
-//        header("Location: index.php?page=login-register");
-//    }
-
-
 
 
 // url
@@ -64,4 +72,6 @@ if (!file_exists($page)) $page = "404.php";
 include "header.php";
 include $page;
 include "footer.php";
-
+//Repo
+pg_close($db_handle);
+//

@@ -145,7 +145,6 @@
                                                     <select class="form-control" id="brands">
                                                         <option value="" selected>All</option>
                                                         <?php
-                                                        include "./DAL/BrandRepository.php";
                                                         $brands = GetAllBrands();
                                                         foreach ($brands as $brand) {
                                                             echo "<option value='$brand[id]'>$brand[name]</option>";
@@ -169,15 +168,6 @@
                                                 <div class="module-list_item">
                                                     <select class="form-control" name="model-id" id="models">
                                                         <option value="" selected>All</option>
-                                                        <!--                                                            --><?php
-                                                        //                                                            if (isset($_GET['brandId'])) {
-                                                        //                                                                include "./DAL/ModelRepository.php";
-                                                        //                                                                $models = GetModelsByBrandId($_GET['brandId']);
-                                                        //                                                                foreach ($models as $model) {
-                                                        //                                                                    echo "<option value='$model[id]'>$model[name]</option>";
-                                                        //                                                                }
-                                                        //                                                            }
-                                                        //                                                            ?>
                                                     </select>
 
                                                 </div>
@@ -270,7 +260,6 @@
                                                     <select class="nice-select wide" name="city-id">
                                                         <option value="" selected>All</option>
                                                         <?php
-                                                        include "./DAL/CityRepository.php";
                                                         $cities = GetAllCities();
                                                         foreach ($cities as $city) {
                                                             echo "<option value='$city[id]'>$city[name]</option>";
@@ -292,7 +281,6 @@
                                                     <select class="nice-select wide" name="color-id">
                                                         <option value="" selected>All</option>
                                                         <?php
-                                                        include "./DAL/ColorRepository.php";
                                                         $colors = GetAllColors();
                                                         foreach ($colors as $color) {
                                                             echo "<option value='$color[id]'>$color[name]</option>";
@@ -343,7 +331,7 @@
                                     </li>
                                     <li class=""><a href="?page=about-us">About Us</a></li>
                                     <li class=""><a href="?page=contact">Contact</a></li>
-                                    <li class=""><a href="?page=admin">Admin</a></li>
+                                    <li class=""><a href="admin.php">Admin</a></li>
                                 </ul>
                             </nav>
                         </div>

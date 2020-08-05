@@ -1,3 +1,16 @@
+<?php
+//session_start();
+//session_regenerate_id();
+//    if (isset($_SESSION['auth'])) {
+//        if($_SESSION['auth']['role'] != 'Admin')
+//        header("Location: index.php?page=login-register");
+//    }else{
+//        header("Location: index.php?page=login-register");
+//    }
+$CONN_STRING ="host='134.122.72.17' port='5432' dbname='phpstepproject' user='phpstepproject' password='phpstepproject'";
+$db_handle = pg_connect($CONN_STRING);
+require_once "./DAL/AdminRepository.php";
+?>
 <!DOCTYPE html>
     <html lang="en">
 
@@ -20,7 +33,6 @@
 
 <?php
 
-require "./DAL/AdminRepository.php";
 
 
 

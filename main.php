@@ -181,7 +181,7 @@ if($color_id != "") {
                     $addeddate = "added";
 
                     $cars = GetAllCarsWithFilter($filter);
-
+if($cars != null){
                     foreach ($cars as $count => $array) {
 
                         echo "<div class='col-lg-4'>
@@ -213,6 +213,7 @@ if($color_id != "") {
                             
                         </div>";
                     }
+}
 
                     ?>
 

@@ -1,7 +1,33 @@
 <?php
-
-require "./DAL/CarRepository.php";
+session_start();
+session_regenerate_id();
 require "./DAL/UserRepository.php";
+require "./DAL/CarRepository.php";
+require "./DAL/RoleRepository.php";
+
+include "login-register-post.php";
+
+$isAuthenticate = isset($_SESSION['auth']);
+
+if (isset($_GET['page'])) {
+    if ($_GET['page'] == 'login-register') {
+        if ($isAuthenticate) {
+            echo 'login-register';
+            header("Location: ?page=main");
+            exit;
+        }
+    }
+}
+
+//session_start();
+//    if (isset($_SESSION['auth'])) {
+//        if($_SESSION['auth']['role'] != 'Admin')
+//        header("Location: ?page=login-register");
+//    }else{
+//        header("Location: index.php?page=login-register");
+//    }
+
+
 
 
 // url
@@ -38,3 +64,4 @@ if (!file_exists($page)) $page = "404.php";
 include "header.php";
 include $page;
 include "footer.php";
+

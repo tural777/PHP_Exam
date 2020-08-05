@@ -27,6 +27,17 @@ function GetRoleById($Id){
     return $arr;
 }
 
+function GetRoleByName($name){
+    global $CONN_STRING;
+    $db_handle = pg_connect($CONN_STRING);
+    $query = "select * from role where name = '$name';";
+    $pg_query = pg_query($db_handle, $query);
+
+    $arr = pg_fetch_all($pg_query, PGSQL_ASSOC);
+    pg_close($db_handle);
+    return $arr;
+}
+
 function InsertRole($roleName)
 {
     global $CONN_STRING;

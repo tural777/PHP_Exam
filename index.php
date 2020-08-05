@@ -3,7 +3,7 @@ session_start();
 session_regenerate_id();
 
 //repo
-$CONN_STRING ="host='134.122.72.17' port='5432' dbname='phpstepproject' user='phpstepproject' password='phpstepproject'";
+require_once "./DAL/DbConnection.php";
 $db_handle = pg_connect($CONN_STRING);
 //require_once "./DAL/AdminRepository.php";
 require_once "./DAL/BodyTypeRepository.php";

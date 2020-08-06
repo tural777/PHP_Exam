@@ -9,7 +9,7 @@ $db_handle = pg_connect($CONN_STRING);
 //require_once "./DAL/AdminRepository.php";
 require_once "./DAL/BodyTypeRepository.php";
 require_once "./DAL/BrandRepository.php";
-//require_once "./DAL/CarImgRepository.php";
+require_once "./DAL/CarImgRepository.php";
 require_once "./DAL/CarRepository.php";
 require_once "./DAL/CityRepository.php";
 require_once "./DAL/ColorRepository.php";

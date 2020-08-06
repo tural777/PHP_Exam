@@ -85,33 +85,31 @@
                                 </button>
                             </form>
                         </div>
-
-                        <div class="col-lg-4 col-md-9 col-sm-7">
-                            <div class="header-right_area">
-                                <ul>
-                                    <li class="mobile-menu_wrap d-flex d-lg-none">
-                                        <a href="#mobileMenu" class="mobile-menu_btn toolbar-btn color--white">
-                                            <i class="ion-navicon"></i>
-                                        </a>
-                                    </li>
-                                    <li class="minicart-wrap">
-                                        <a href="#miniCart" class="minicart-btn toolbar-btn">
-                                            <div class="minicart-count_area">
-                                                <span class="item-count">3</span>
-                                                <i class="far fa-heart"></i>
-                                            </div>
-                                            <div class="minicart-front_text">
-                                                <span>Wish</span>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li class="contact-us_wrap">
-                                        <a href="?page=shareAnnouncment"><i class="fas fa-plus-circle"></i>Elan yerləşdir</a>
-                                    </li>
-                                </ul>
-                            </div>
                     </div>
-                    
+                    <div class="col-lg-4 col-md-9 col-sm-7">
+                        <div class="header-right_area">
+                            <ul>
+                                <li class="mobile-menu_wrap d-flex d-lg-none">
+                                    <a href="#mobileMenu" class="mobile-menu_btn toolbar-btn color--white">
+                                        <i class="ion-navicon"></i>
+                                    </a>
+                                </li>
+                                <li class="minicart-wrap">
+                                    <a href="#miniCart" class="minicart-btn toolbar-btn">
+                                        <div class="minicart-count_area">
+                                            <span class="item-count">3</span>
+                                            <i class="far fa-heart"></i>
+                                        </div>
+                                        <div class="minicart-front_text">
+                                            <span>Wish</span>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="contact-us_wrap">
+                                    <a href="#"><i class="fas fa-plus-circle"></i>Elan yerləşdir</a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -159,26 +157,8 @@
                                         </div>
 
 
-
-                                                <div class="module-body mb-5">
-                                                    <div class="module-list_item">
-                                                        <select class="form-control" name="model-id" id="models">
-                                                            <option value="" selected>All</option>
-                                                            <!--                                                            --><?php
-                                                                                                                                //                                                            if (isset($_GET['brandId'])) {
-                                                                                                                                //                                                                include "./DAL/ModelRepository.php";
-                                                                                                                                //                                                                $models = GetModelsByBrandId($_GET['brandId']);
-                                                                                                                                //                                                                foreach ($models as $model) {
-                                                                                                                                //                                                                    echo "<option value='$model[id]'>$model[name]</option>";
-                                                                                                                                //                                                                }
-                                                                                                                                //                                                            }
-                                                                                                                                //                                                            
-                                                                                                                                ?>
-                                                        </select>
-
-                                                    </div>
-                                                </div>
-
+                                        <!-- Models -->
+                                        <div class="uren-sidebar_categories mb-2">
 
                                             <div class="uren-categories_title mb-3">
                                                 <h6>Models</h6>
@@ -587,7 +567,5 @@
             </div>
         </div>
 
-
     </header>
     <!-- Uren's Header Main Area End Here -->
-

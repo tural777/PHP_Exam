@@ -5,7 +5,9 @@ function GetAllCars()
 {
     global $db_handle ;
     $pg_query = pg_query($db_handle, "
-select distinct Car.Id,Title,IsActive,added,updated, City.Name as City,Brand.Name as Brand,model.Name as Model,Year,Body_type.Name as BodyType,Color.Name as Color,EngineCapacity,HP,Fuel_type.Name as FuelType,Mileage,Gearbox_type.Name as Gearbox,Transmission.Name as Transmission,Price,Description, Car_Img.Img_Path from car
+SELECT distinct Car.Id,Title,IsActive,added,updated, City.Name as City,Brand.Name as Brand,model.Name as Model,Year,Body_type.Name as BodyType,Color.Name as Color,EngineCapacity,HP,Fuel_type.Name as FuelType,Mileage,Gearbox_type.Name as Gearbox,Transmission.Name as Transmission,Price,Description, Img_Path
+from car
+
     left join \"user\" u on Car.User_Id = u.Id
     left join  city on Car.City_Id = city.Id
     left join  model on Car.Model_Id = model.Id
@@ -15,7 +17,14 @@ select distinct Car.Id,Title,IsActive,added,updated, City.Name as City,Brand.Nam
     left join  fuel_type  on Car.Fuel_type_Id =Fuel_type.Id
     left join  gearbox_type  on Car.Gearbox_type_Id = Gearbox_type.Id
     left join  transmission  on Car.Transmission_Id = transmission.Id
-    left join Car_Img on Car.Id = Car_Img.Car_Id
+
+LEFT JOIN LATERAL (
+     SELECT *
+     FROM Car_Img
+     WHERE Car_Id = Car.Id
+     LIMIT 1
+) I
+ON true
     order by added desc;
 ");
 
@@ -28,7 +37,9 @@ function GetAllCarsWithFilter($filter)
 {
     global $db_handle ;
     $query = "
-select distinct Car.Id,Title,IsActive,added,updated, City.Name as City,Brand.Name as Brand,model.Name as Model,Year,Body_type.Name as BodyType,Color.Name as Color,EngineCapacity,HP,Fuel_type.Name as FuelType,Mileage,Gearbox_type.Name as Gearbox,Transmission.Name as Transmission,Price,Description, Car_Img.Img_Path from car
+SELECT distinct Car.Id,Title,IsActive,added,updated, City.Name as City,Brand.Name as Brand,model.Name as Model,Year,Body_type.Name as BodyType,Color.Name as Color,EngineCapacity,HP,Fuel_type.Name as FuelType,Mileage,Gearbox_type.Name as Gearbox,Transmission.Name as Transmission,Price,Description, Img_Path
+from car
+
     left join \"user\" u on Car.User_Id = u.Id
     left join  city on Car.City_Id = city.Id
     left join  model on Car.Model_Id = model.Id
@@ -38,7 +49,14 @@ select distinct Car.Id,Title,IsActive,added,updated, City.Name as City,Brand.Nam
     left join  fuel_type  on Car.Fuel_type_Id =Fuel_type.Id
     left join  gearbox_type  on Car.Gearbox_type_Id = Gearbox_type.Id
     left join  transmission  on Car.Transmission_Id = transmission.Id
-    left join Car_Img on Car.Id = Car_Img.Car_Id
+
+LEFT JOIN LATERAL (
+     SELECT *
+     FROM Car_Img
+     WHERE Car_Id = Car.Id
+     LIMIT 1
+) I
+ON true
     $filter
     order by added desc;
 ";
@@ -56,7 +74,9 @@ function GetCarById($Id)
     }
     global $db_handle ;
     $query = "
-    select distinct Car.Id,Title,IsActive,added,updated, City.Name as City,Brand.Name as Brand,model.Name as Model,Year,Body_type.Name as BodyType,Color.Name as Color,EngineCapacity,HP,Fuel_type.Name as FuelType,Mileage,Gearbox_type.Name as Gearbox,Transmission.Name as Transmission,Price,Description, Car_Img.Img_Path from car
+    SELECT distinct Car.Id,Title,IsActive,added,updated, City.Name as City,Brand.Name as Brand,model.Name as Model,Year,Body_type.Name as BodyType,Color.Name as Color,EngineCapacity,HP,Fuel_type.Name as FuelType,Mileage,Gearbox_type.Name as Gearbox,Transmission.Name as Transmission,Price,Description, Img_Path
+from car
+
     left join \"user\" u on Car.User_Id = u.Id
     left join  city on Car.City_Id = city.Id
     left join  model on Car.Model_Id = model.Id
@@ -66,7 +86,14 @@ function GetCarById($Id)
     left join  fuel_type  on Car.Fuel_type_Id =Fuel_type.Id
     left join  gearbox_type  on Car.Gearbox_type_Id = Gearbox_type.Id
     left join  transmission  on Car.Transmission_Id = transmission.Id
-    left join Car_Img on Car.Id = Car_Img.Car_Id
+
+LEFT JOIN LATERAL (
+     SELECT *
+     FROM Car_Img
+     WHERE Car_Id = Car.Id
+     LIMIT 1
+) I
+ON true
     where Car.Id = '$Id';
     ";
     $pg_query = pg_query($db_handle, $query);

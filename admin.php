@@ -13,11 +13,9 @@ require_once "./DAL/AdminRepository.php";
 
 
 
-
-
 $allDbTableNames = ShowAllTables();
 $action = isset($_GET["Action"]) ? $_GET["Action"] : "";
-$tableName = isset($_GET["TableName"]) ? $_GET["TableName"] : $allDbTableNames[0]["table_name"];
+$tableName = isset($_GET["TableName"]) ? $_GET["TableName"] : $allDbTableNames[6]["table_name"];
 
 
 
@@ -76,6 +74,9 @@ if ($action != "") {
     case "Del":
       GenericDeleteById($tableName, $id);
       break;
+
+    case "Update":
+      break;
   }
 }
 
@@ -92,8 +93,8 @@ if ($action != "") {
 
   <style>
     #tableNames li a:hover {
-      color: teal  !important;
-      
+      color: teal !important;
+
     }
   </style>
 
@@ -180,9 +181,9 @@ if ($action != "") {
 
 
       ?>
-      
-      
-        <h3 >Table name:  <?=$tableName?></h3>
+
+
+        <h3>Table name: <?= $tableName ?></h3>
         <table style="border:3px solid teal;" class="shadow table-hover table table-striped table-sm  text-center">
 
           <thead class="table-dark">
@@ -194,7 +195,7 @@ if ($action != "") {
                 foreach ($array as $Key => $Value) {
                   echo '<th class="px-5">' . ucfirst($Key) . '</th>';
                 }
-                echo "<th>Control</th>";
+                echo '<th style="width:15%;">Control</th>';
                 break;
               }
 
@@ -210,21 +211,16 @@ if ($action != "") {
             $TempAssArrLength = count($arrayAssoc);
             foreach ($arrayAssoc as $index => $array) {
 
-              echo "<form><tr>";
+              echo '<form id="formId' . $index . '";><tr>';
               foreach ($array as $Key => $Value) {
-                echo "<td>$Value</td>";
-
-                if (ucfirst($Key) == "Id") {
-                  echo '<input name= "Id" type="hidden" value="' . $Value . '">';
-                }
+                echo '<td> <input name="' . ucfirst($Key) . '" readonly value="' . $Value . '" type="text" class="text-center border-0 form-control" style="background:none;"></td>';
               }
 
               echo '<td>
                     <div class="btn-group btn-group-sm" role="group">
                         <input name= "TableName" type="hidden" value="' . $tableName . '">
-                        <input name= "Action"    type="hidden" value="Del" >
-                        <button type="submit" class="btn btn-info   btn-sm"><i class="far fa-edit"></i></button>
-                        <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
+                        <a href="#" onclick="Update(formId' . $index . ')" class="btn btn-info   btn-sm"><i class="far fa-edit"></i></a>
+                        <button type="submit" name="Action" value="Del" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
                     </div>
                 </td>';
 
@@ -238,7 +234,7 @@ if ($action != "") {
               // Foreach last iteration
               if (!--$TempAssArrLength) {
 
-                echo "<form><tr>";
+                echo '<form id="addForm"><tr>';
 
                 foreach ($array as $Key => $Value) {
 
@@ -256,17 +252,19 @@ if ($action != "") {
 
                     foreach ($TempAddFuncForAdmin() as $index => $array) {
                       foreach ($array as $Key => $Value) {
-                        if (ucfirst($Key) == "Id")
-                          echo '<option value="' . $Value . '">';
+                        
+                        if (ucfirst($Key) == "Id"){
+                          echo '<option value="' . $Value . '">';}
                         elseif (ucfirst($Key) == "Name")
                           echo $Value . '</option>';
+                          
                       }
                     }
 
 
                     echo '</select>';
                   } elseif (ucfirst($Key) == "Id") {
-                    echo '<input disabled class="form-control" placeholder="' . ucfirst($Key) . '">';
+                    echo '<input readonly name="Id" class="form-control" placeholder="' . ucfirst($Key) . '">';
                   }
                   //elseif (ucfirst($Key) == "Img_path") {
                   //     echo    '<div class="form-group"><label class="form-control" for="file-upload" style="border: 1px solid #ccc; display: inline-block; padding: 6px 12px; cursor: pointer;">
@@ -281,9 +279,9 @@ if ($action != "") {
                 }
 
                 echo    '<td>
-                <input value="' . $tableName . '" name="TableName" type="hidden">
-                <input value="Add" name="Action" type="hidden">
-                <input type="submit" value="Add" style="width: 65px;" class="btn btn-primary">';
+                <input value="' . $tableName . '" name="TableName" type="hidden" >
+                <input type="hidden" id="clearButton" value="Clear" onclick="Clear()" class="btn btn-secondary text-center">
+                <input name = "Action" type="submit" value="Add" style="width: 70px;" class="btn btn-primary text-center px-0">';
 
 
                 echo "</tr></form>";
@@ -292,9 +290,7 @@ if ($action != "") {
 
 
             ?>
-
           </tbody>
-
         </table>
 
       <?php
@@ -308,6 +304,39 @@ if ($action != "") {
 
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/js/bootstrap.min.js" integrity="sha384-XEerZL0cuoUbHE4nZReLT7nx9gQrQreJekYhJD9WNWhH8nEW+0c5qq7aIo2Wl30J" crossorigin="anonymous"></script>
+
+
+
+  <script>
+    let saveCleanAddForm = document.getElementById("addForm");
+
+    function Update(f) {
+
+
+      selectedForm = $(f).serializeArray();
+
+      console.log($('#addForm').serializeArray());
+
+      selectedForm.forEach(function(entry) {
+        console.log(entry);
+        saveCleanAddForm[entry["name"]].value = entry["value"];
+      });
+
+      saveCleanAddForm["Action"].value = "Update"
+      document.getElementById("clearButton").setAttribute("type", "button");
+
+    }
+
+
+    function Clear() {
+
+      let resetForm = document.getElementById("addForm");
+      resetForm.reset($(saveCleanAddForm).serializeArray());
+      resetForm["Action"].value = "Add"
+      document.getElementById("clearButton").setAttribute("type", "hidden");
+
+    }
+  </script>
 </body>
 
 </html>

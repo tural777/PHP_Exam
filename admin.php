@@ -15,7 +15,7 @@ require_once "./DAL/AdminRepository.php";
 
 $allDbTableNames = ShowAllTables();
 $action = isset($_GET["Action"]) ? $_GET["Action"] : "";
-$tableName = isset($_GET["TableName"]) ? $_GET["TableName"] : $allDbTableNames[6]["table_name"];
+$tableName = isset($_GET["TableName"]) ? $_GET["TableName"] : $allDbTableNames[0]["table_name"];
 
 
 
@@ -52,7 +52,7 @@ if ($action != "") {
       if ($tableName == "model") InsertModel($name, $brandId);
       elseif ($tableName == "user") InsertUser($name, $surName, $email, $pass, $roleId);
       elseif ($tableName == "car") InsertCar(
-        1,
+        1, //Admin
         $title,
         $cityId,
         $modelId,
@@ -76,6 +76,26 @@ if ($action != "") {
       break;
 
     case "Update":
+      if ($tableName == "user") UpdateUser($id, $name, $surName, $email, $pass, $roleId);
+      elseif ($tableName == "car") UpdateCar(
+        $id,
+        $title,
+        $isActive,
+        $cityId,
+        $modelId,
+        $year,
+        $bodytypeId,
+        $colorId,
+        $enginecapacity,
+        $hp,
+        $fueltypeId,
+        $mileage,
+        $gearboxtypeId,
+        $transmissionId,
+        $price,
+        $description
+      );
+      else GenericUpdate($id, $name, $tableName);
       break;
   }
 }
@@ -93,36 +113,42 @@ if ($action != "") {
 
   <style>
     #tableNames li a:hover {
-      color: teal !important;
+      color: black !important;
+    }
 
+    #tableNames,
+    .theadColor,
+    header {
+      background: rgb(0, 128, 128);
+      background: linear-gradient(90deg, rgba(0, 128, 128, 1) 0%, rgba(0, 128, 107, 1) 27%, rgba(0, 110, 128, 1) 75%, rgba(0, 128, 128, 1) 100%);
     }
   </style>
 
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <header style="height: 10vh;" class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="h1 text-light pl-5 mx-auto" style="text-decoration: none;" href="admin.php">Admin</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-  </nav>
+  </header>
 
   <div class="container-fluid">
     <div class="row">
 
-      <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light collapse shadow">
-        <h1 class="text-center mt-2 h2">Tables</h1>
+      <nav id="sidebarMenu" style="height: 90vh;" class="col-md-3 col-lg-2 d-md-block collapse bg-light shadow">
+        <h1 class="text-center text-dark h2 mt-2 ">Tables</h1>
 
-        <div class="sidebar-sticky pt-3 text-center">
-          <ul id="tableNames" style="border-radius: 25px; " class="bg-dark m-0 mb-3 p-0 border  shadow nav flex-column">
+        <div class="sidebar-sticky pt-2 text-center">
+          <ul id="tableNames" style="border-radius: 25px; border:3px solid teal;" class="bg-dark m-0 mb-3 p-0 shadow nav flex-column">
 
             <?php
             foreach ($allDbTableNames as $index => $arr) {
               foreach ($arr as $key => $value) {
                 if ($value != "car_img") {
                   echo '<li class="nav-item">
-                              <a class="nav-link text-light" href="?TableName=' . $value . '"><b>' . ucfirst($value) . '</b></a></li>';
+                  <a class="nav-link  ' . ($value == $tableName ? 'text-dark' : ' text-light') . '" href="?TableName=' . $value . '"><b>' . ucfirst($value) . '</b></a></li>';
                 }
               }
             }
@@ -183,10 +209,9 @@ if ($action != "") {
       ?>
 
 
-        <h3>Table name: <?= $tableName ?></h3>
         <table style="border:3px solid teal;" class="shadow table-hover table table-striped table-sm  text-center">
 
-          <thead class="table-dark">
+          <thead class="theadColor">
             <tr>
 
               <?php
@@ -217,12 +242,12 @@ if ($action != "") {
               }
 
               echo '<td>
-                    <div class="btn-group btn-group-sm" role="group">
-                        <input name= "TableName" type="hidden" value="' . $tableName . '">
-                        <a href="#" onclick="Update(formId' . $index . ')" class="btn btn-info   btn-sm"><i class="far fa-edit"></i></a>
-                        <button type="submit" name="Action" value="Del" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
-                    </div>
-                </td>';
+                      <div class="btn-group btn-group-sm" role="group">
+                          <input name= "TableName" type="hidden" value="' . $tableName . '">
+                          <a href="#" onclick="Update(formId' . $index . ')" class="btn btn-info   btn-sm"><i class="far fa-edit"></i></a>
+                          <button type="submit" name="Action" value="Del" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
+                      </div>
+                  </td>';
 
 
               echo "</tr></form>";
@@ -234,7 +259,7 @@ if ($action != "") {
               // Foreach last iteration
               if (!--$TempAssArrLength) {
 
-                echo '<form id="addForm"><tr>';
+                echo '<form id="controlForm"><tr>';
 
                 foreach ($array as $Key => $Value) {
 
@@ -252,12 +277,13 @@ if ($action != "") {
 
                     foreach ($TempAddFuncForAdmin() as $index => $array) {
                       foreach ($array as $Key => $Value) {
-                        
-                        if (ucfirst($Key) == "Id"){
-                          echo '<option value="' . $Value . '">';}
-                        elseif (ucfirst($Key) == "Name")
-                          echo $Value . '</option>';
-                          
+
+                        if (ucfirst($Key) == "Id") {
+                          echo '<option value="' . $Value . '">';
+                        } elseif (ucfirst($Key) == "Name") {
+                          echo $Value . '</option>'; // for add action (option value with id)
+                          echo '<option class="hakuna" style="display:none;" value="' . $Value . '">' . $Value . '</option>'; // for update action (option value with name)
+                        }
                       }
                     }
 
@@ -279,9 +305,9 @@ if ($action != "") {
                 }
 
                 echo    '<td>
-                <input value="' . $tableName . '" name="TableName" type="hidden" >
-                <input type="hidden" id="clearButton" value="Clear" onclick="Clear()" class="btn btn-secondary text-center">
-                <input name = "Action" type="submit" value="Add" style="width: 70px;" class="btn btn-primary text-center px-0">';
+                  <input value="' . $tableName . '" name="TableName" type="hidden" >
+                  <input type="hidden" id="clearButton" value="Clear" onclick="Clear()" class="btn btn-secondary text-center">
+                  <input name = "Action" type="submit" onmousedown="RemoveOptions()" value="Add" style="width: 70px;" class="btn btn-primary text-center px-0">';
 
 
                 echo "</tr></form>";
@@ -306,37 +332,37 @@ if ($action != "") {
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/js/bootstrap.min.js" integrity="sha384-XEerZL0cuoUbHE4nZReLT7nx9gQrQreJekYhJD9WNWhH8nEW+0c5qq7aIo2Wl30J" crossorigin="anonymous"></script>
 
 
-
   <script>
-    let saveCleanAddForm = document.getElementById("addForm");
+    let saveCleanControlForm = document.getElementById("controlForm");
+
+
+    function RemoveOptions() {
+      $('.hakuna').remove();
+    }
 
     function Update(f) {
 
-
       selectedForm = $(f).serializeArray();
 
-      console.log($('#addForm').serializeArray());
-
       selectedForm.forEach(function(entry) {
-        console.log(entry);
-        saveCleanAddForm[entry["name"]].value = entry["value"];
+        saveCleanControlForm[entry["name"]].value = entry["value"];
       });
 
-      saveCleanAddForm["Action"].value = "Update"
+      saveCleanControlForm["Action"].value = "Update"
       document.getElementById("clearButton").setAttribute("type", "button");
-
     }
 
 
     function Clear() {
 
-      let resetForm = document.getElementById("addForm");
-      resetForm.reset($(saveCleanAddForm).serializeArray());
+      let resetForm = document.getElementById("controlForm");
+      resetForm.reset($(saveCleanControlForm).serializeArray());
       resetForm["Action"].value = "Add"
       document.getElementById("clearButton").setAttribute("type", "hidden");
 
     }
   </script>
+
 </body>
 
 </html>

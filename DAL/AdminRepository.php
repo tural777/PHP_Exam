@@ -152,8 +152,8 @@ function GenericInsertOnlyOneColumn($table, $value)
 
     $query = "insert into $table (name)
     values ('$value')";
-    
-    pg_query($db_handle, $query);
+    pg_send_query($db_handle, $query);
+    return pg_get_result($db_handle);
 }
 
 
@@ -164,8 +164,8 @@ function InsertModel($name, $brandId)
 
     $query = "insert into model (name, brand_id)
     values ('$name', $brandId)";
-    
-    pg_query($db_handle, $query);
+    pg_send_query($db_handle, $query);
+    return pg_get_result($db_handle);
 }
 
 
@@ -175,9 +175,8 @@ function InsertUser($name, $surname, $email, $password, $role_id)
     global $db_handle;
     $query = "insert into \"user\" (email, password,role_id,name,surname) 
     values ('$email','$password','$role_id','$name','$surname')";
-    $pg_query = pg_query($db_handle, $query);
-    //$result = pg_fetch_row($pg_query);
-    //return $result[0];
+    pg_send_query($db_handle, $query);
+    return pg_get_result($db_handle);
 }
 
 
@@ -186,22 +185,24 @@ function InsertCar($user_id, $title ,$city_id, $model_id, $year, $body_type_id, 
     global $db_handle;
     $query = "insert into car (User_Id,Title, IsActive,City_Id,Model_Id, Year,Body_type_Id,Color_Id, EngineCapacity, HP,Fuel_type_Id, Mileage,Gearbox_type_Id,transmission_id, Price, Description)
     values ('$user_id','$title','$isActive','$city_id','$model_id','$year','$body_type_id','$color_id','$engineCapacity','$HP','$fuel_type_id','$mileage','$gearbox_type_id','$transmission_id','$price','$description') RETURNING id;";
-    pg_query($db_handle, $query);
-    
+    pg_send_query($db_handle, $query);
+    return pg_get_result($db_handle);
 }
 
 
 function GenericDeleteById($table, $Id){
     global $db_handle;
     $query = "delete from \"$table\" where id = '$Id'";
-    pg_query($db_handle, $query);
+    pg_send_query($db_handle, $query);
+    return pg_get_result($db_handle);
 }
 
 
 function GenericUpdate($id, $name, $tableName){
     global $db_handle;
     $query = "update $tableName set name = '$name' where id = '$id'";
-    pg_query($db_handle, $query);
+    pg_send_query($db_handle, $query);
+    return pg_get_result($db_handle);
 }
 
 
@@ -209,7 +210,8 @@ function UpdateUser($userId, $name, $surname, $email, $password, $role_id)
 {
     global $db_handle;
     $query = "update \"user\" set (name,surname,email,password,role_id) = ('$name','$surname','$email','$password','$role_id') where id = '$userId'";
-    pg_query($db_handle, $query);
+    pg_send_query($db_handle, $query);
+    return pg_get_result($db_handle);
 }
 
 
@@ -219,7 +221,8 @@ function UpdateCar($car_id, $title, $isActive, $city_id, $model_id, $year, $body
     $query = "update car set (updated,Title, IsActive,City_Id,Model_Id, Year,Body_type_Id,Color_Id, EngineCapacity, HP,Fuel_type_Id, Mileage,Gearbox_type_Id,transmission_id, Price, Description) 
     = ('now()','$title','$isActive','$city_id','$model_id','$year','$body_type_id','$color_id','$engineCapacity','$HP','$fuel_type_id','$mileage','$gearbox_type_id','$transmission_id','$price','$description')
     where Id ='$car_id'";
-    pg_query($db_handle, $query);
+    pg_send_query($db_handle, $query);
+    return pg_get_result($db_handle);
 }
 
 

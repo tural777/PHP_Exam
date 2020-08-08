@@ -1,4 +1,6 @@
 <?php
+
+
 //session_start();
 //session_regenerate_id();
 //    if (isset($_SESSION['auth'])) {
@@ -43,15 +45,17 @@ if ($action != "") {
   $transmissionId = isset($_GET["Transmissions"]) ? $_GET["Transmissions"] : "";
   $price = isset($_GET["Price"]) ? $_GET["Price"] : "";
   $description = isset($_GET["Description"]) ? $_GET["Description"] : "";
+  $dbResult = "";
+
 
 
 
   //Working with DB
   switch ($action) {
     case "Add":
-      if ($tableName == "model") InsertModel($name, $brandId);
-      elseif ($tableName == "user") InsertUser($name, $surName, $email, $pass, $roleId);
-      elseif ($tableName == "car") InsertCar(
+      if ($tableName == "model") $dbResult = InsertModel($name, $brandId);
+      elseif ($tableName == "user") $dbResult = InsertUser($name, $surName, $email, $pass, $roleId);
+      elseif ($tableName == "car") $dbResult = InsertCar(
         1, //Admin
         $title,
         $cityId,
@@ -68,16 +72,16 @@ if ($action != "") {
         $price,
         $description
       );
-      else GenericInsertOnlyOneColumn($tableName, $name);
+      else $dbResult =  GenericInsertOnlyOneColumn($tableName, $name);
       break;
 
     case "Del":
-      GenericDeleteById($tableName, $id);
+      $dbResult = GenericDeleteById($tableName, $id);
       break;
 
     case "Update":
-      if ($tableName == "user") UpdateUser($id, $name, $surName, $email, $pass, $roleId);
-      elseif ($tableName == "car") UpdateCar(
+      if ($tableName == "user") $dbResult = UpdateUser($id, $name, $surName, $email, $pass, $roleId);
+      elseif ($tableName == "car") $dbResult = UpdateCar(
         $id,
         $title,
         $isActive,
@@ -95,10 +99,36 @@ if ($action != "") {
         $price,
         $description
       );
-      else GenericUpdate($id, $name, $tableName);
+      else $dbResult = GenericUpdate($id, $name, $tableName);
       break;
   }
+
+
+
+  // // Error handling
+  // if ($dbResult) {
+  //   $state = pg_result_error_field($dbResult, PGSQL_DIAG_SQLSTATE);
+  //   if ($state == 0) {
+  //     echo "Success";
+  //   } else {
+
+  //     if ($state == "23505") {
+  //       echo "Error1";
+  //     } else {
+  //       echo "Error2";
+  //     }
+  //   }
+  // }
+
+
+
 }
+
+
+
+
+
+
 
 ?>
 <!DOCTYPE html>
@@ -109,6 +139,7 @@ if ($action != "") {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css" integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" crossorigin="anonymous">
   <link rel="stylesheet" href="assets/css/vendor/font-awesome.css">
+  <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon">
   <title>Admin</title>
 
   <style>
@@ -133,6 +164,7 @@ if ($action != "") {
       <span class="navbar-toggler-icon"></span>
     </button>
   </header>
+
 
   <div class="container-fluid">
     <div class="row">
@@ -171,11 +203,9 @@ if ($action != "") {
 
       <main role="main" class="col-md-9 col-lg-10 my-auto">
 
-
         <div class="table-responsive mt-5">
           <?php AddSelectedTableContent($tableName); ?>
         </div>
-
 
       </main>
 
@@ -333,8 +363,8 @@ if ($action != "") {
 
 
   <script>
-    let saveCleanControlForm = document.getElementById("controlForm");
 
+    let saveCleanControlForm = document.getElementById("controlForm");
 
     function RemoveOptions() {
       $('.hakuna').remove();
@@ -352,7 +382,6 @@ if ($action != "") {
       document.getElementById("clearButton").setAttribute("type", "button");
     }
 
-
     function Clear() {
 
       let resetForm = document.getElementById("controlForm");
@@ -361,6 +390,7 @@ if ($action != "") {
       document.getElementById("clearButton").setAttribute("type", "hidden");
 
     }
+
   </script>
 
 </body>

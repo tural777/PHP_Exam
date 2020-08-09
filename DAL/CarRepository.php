@@ -67,6 +67,41 @@ ON true
     return $arr;
 }
 
+function GetAllCarsWithFilterAndLimit($filter,$limit,$offset)
+{
+    global $db_handle ;
+    $query = "
+SELECT distinct Car.Id,Title,IsActive,added,updated, City.Name as City,Brand.Name as Brand,model.Name as Model,Year,Body_type.Name as BodyType,Color.Name as Color,EngineCapacity,HP,Fuel_type.Name as FuelType,Mileage,Gearbox_type.Name as Gearbox,Transmission.Name as Transmission,Price,Description, Img_Path
+from car
+
+    left join \"user\" u on Car.User_Id = u.Id
+    left join  city on Car.City_Id = city.Id
+    left join  model on Car.Model_Id = model.Id
+    left join  brand on Model.Brand_id = Brand.Id
+    left join  body_type  on Car.Body_type_Id = Body_type.id
+    left join  color  on Car.Color_Id = color.Id
+    left join  fuel_type  on Car.Fuel_type_Id =Fuel_type.Id
+    left join  gearbox_type  on Car.Gearbox_type_Id = Gearbox_type.Id
+    left join  transmission  on Car.Transmission_Id = transmission.Id
+
+LEFT JOIN LATERAL (
+     SELECT *
+     FROM Car_Img
+     WHERE Car_Id = Car.Id
+     LIMIT 1
+) I
+ON true
+    $filter
+    order by added desc
+    LIMIT $limit  OFFSET $offset;
+";
+    $pg_query = pg_query($db_handle, $query);
+
+    $arr = pg_fetch_all($pg_query, PGSQL_ASSOC);
+
+    return $arr;
+}
+
 function GetCarById($Id)
 {
     if (!$Id) {

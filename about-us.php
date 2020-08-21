@@ -112,11 +112,11 @@
                 <div class="team-member">
                     <div class="team-thumb img-hover_effect">
                         <a href="#">
-                            <img src="assets/images/about-us/team/1.jpg" alt="Our Team Member">
+                            <img style="height: 500px;" src="assets/images/about-us/team/N.Tural.jpeg" alt="Our Team Member">
                         </a>
                     </div>
                     <div class="team-content text-center">
-                        <h3>Tural</h3>
+                        <h3>Tural Novruzov</h3>
                         <p>IT Expert</p>
                         <a href="#">info@example.com</a>
                         <div class="uren-social_link">
@@ -161,11 +161,11 @@
                 <div class="team-member">
                     <div class="team-thumb img-hover_effect">
                         <a href="#">
-                            <img src="assets/images/about-us/team/2.jpg" alt="Our Team Member">
+                            <img  style="height: 500px;" src="assets/images/about-us/team/Rufet.jpg" alt="Our Team Member">
                         </a>
                     </div>
                     <div class="team-content text-center">
-                        <h3>Anny Adams</h3>
+                        <h3>Rufet Ismayilov</h3>
                         <p>Web Designer</p>
                         <a href="#">info@example.com</a>
                         <div class="uren-social_link">
@@ -210,11 +210,11 @@
                 <div class="team-member">
                     <div class="team-thumb img-hover_effect">
                         <a href="#">
-                            <img src="assets/images/about-us/team/3.jpg" alt="Our Team Member">
+                            <img style="height: 500px;" src="assets/images/about-us/team/M.Tural.jpg" alt="Our Team Member">
                         </a>
                     </div>
                     <div class="team-content text-center">
-                        <h3>Edvin Adams</h3>
+                        <h3>Tural Mustafayev</h3>
                         <p>Content Writer</p>
                         <a href="javascript:void(0)">info@example.com</a>
                         <div class="uren-social_link">

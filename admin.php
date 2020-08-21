@@ -150,8 +150,7 @@ if ($action != "") {
     #tableNames,
     .theadColor,
     header {
-      background: rgb(0, 128, 128);
-      background: linear-gradient(90deg, rgba(0, 128, 128, 1) 0%, rgba(0, 128, 107, 1) 27%, rgba(0, 110, 128, 1) 75%, rgba(0, 128, 128, 1) 100%);
+      background: black;
     }
   </style>
 
@@ -159,7 +158,7 @@ if ($action != "") {
 
 <body>
   <header style="height: 10vh;" class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="h1 text-light pl-5 mx-auto" style="text-decoration: none;" href="admin.php">Admin</a>
+    <a class="h1 pl-5 mx-auto" style="text-decoration: none; color: #ffc400;" href="admin.php">Admin</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -173,14 +172,14 @@ if ($action != "") {
         <h1 class="text-center text-dark h2 mt-2 ">Tables</h1>
 
         <div class="sidebar-sticky pt-2 text-center">
-          <ul id="tableNames" style="border-radius: 25px; border:3px solid teal;" class="bg-dark m-0 mb-3 p-0 shadow nav flex-column">
+          <ul id="tableNames" style="border-radius: 25px; border:3px solid #ffc400;" class="bg-dark m-0 mb-3 p-0 shadow nav flex-column">
 
             <?php
             foreach ($allDbTableNames as $index => $arr) {
               foreach ($arr as $key => $value) {
                 if ($value != "car_img") {
                   echo '<li class="nav-item">
-                  <a class="nav-link  ' . ($value == $tableName ? 'text-dark' : ' text-light') . '" href="?TableName=' . $value . '"><b>' . ucfirst($value) . '</b></a></li>';
+                  <a class="nav-link  ' . ($value == $tableName ? 'text-warning' : ' text-light') . '" href="?TableName=' . $value . '"><b>' . ucfirst($value) . '</b></a></li>';
                 }
               }
             }
@@ -239,7 +238,7 @@ if ($action != "") {
       ?>
 
 
-        <table style="border:3px solid teal;" class="shadow table-hover table table-striped table-sm  text-center">
+        <table style="border:3px solid  #ffc400;" class="shadow table-hover table table-striped table-sm text-white  text-center">
 
           <thead class="theadColor">
             <tr>

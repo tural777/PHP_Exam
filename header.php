@@ -62,28 +62,7 @@
                             </div>
                         </div>
                         <div class="col-xl-5 col-lg-6 d-none d-lg-block">
-                            <div class="hm-form_area">
-                                <form action="#" class="hm-searchbox">
-                                    <select class="nice-select select-search-category">
-                                        <option value="0">All Categories</option>
-                                        <option value="10">Laptops</option>
-                                        <option value="17">Prime Video</option>
-                                        <option value="20">All Videos</option>
-                                        <option value="28">Getting Started</option>
-                                        <option value="18">Computers</option>
-                                        <option value="30">TV &amp; Video</option>
-                                        <option value="31">Audio &amp; Theater</option>
-                                        <option value="32">Camera, Photo</option>
-                                        <option value="13">Cameras</option>
-                                        <option value="14">Headphone</option>
-                                        <option value="15">Smartwatch</option>
-                                        <option value="16">Accessories</option>
-                                    </select>
-                                    <input type="text" placeholder="Enter your search key ...">
-                                    <button class="header-search_btn" type="submit"><i class="ion-ios-search-strong"><span>Search</span></i>
-                                    </button>
-                                </form>
-                            </div>
+                           
                         </div>
                         <div class="col-lg-4 col-md-9 col-sm-7">
                             <div class="header-right_area">
@@ -91,17 +70,6 @@
                                     <li class="mobile-menu_wrap d-flex d-lg-none">
                                         <a href="#mobileMenu" class="mobile-menu_btn toolbar-btn color--white">
                                             <i class="ion-navicon"></i>
-                                        </a>
-                                    </li>
-                                    <li class="minicart-wrap">
-                                        <a href="#miniCart" class="minicart-btn toolbar-btn">
-                                            <div class="minicart-count_area">
-                                                <span class="item-count">3</span>
-                                                <i class="far fa-heart"></i>
-                                            </div>
-                                            <div class="minicart-front_text">
-                                                <span>Wish</span>
-                                            </div>
                                         </a>
                                     </li>
                                     <li class="contact-us_wrap">
@@ -318,8 +286,6 @@
                                                 }
 
                                                 ?>
-                                                <li><a href="?page=wishlist">Wishlist</a></li>
-                                                <li><a href="?page=compare">Compare</a></li>
                                                 <li><a href="?page=404">404 Error</a></li>
                                             </ul>
                                         </li>
@@ -358,23 +324,6 @@
                                 </div>
                             </div>
                         </div>
-
-
-                        <div class="custom-search_col d-none d-md-block d-lg-none">
-                            <div class="hm-form_area">
-                                <form action="#" class="hm-searchbox">
-                                    <select class="nice-select select-search-category">
-                                        <option value="0">All Categories</option>
-                                        <option value="10">Laptops</option>
-                                        <option value="17">Prime Video</option>
-                                        <option value="20">All Videos</option>
-                                    </select>
-                                    <input type="text" placeholder="Enter your search key ...">
-                                    <button class="header-search_btn" type="submit"><i class="ion-ios-search-strong"><span>Search</span></i>
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -391,8 +340,6 @@
                                             <ul class="hm-dropdown">
                                                 <li><a href="?page=my-account">My Account</a></li>
                                                 <li><a href="?page=login-register">Login | Register</a></li>
-                                                <li><a href="?page=wishlist">Wishlist</a></li>
-                                                <li><a href="?page=compare">Compare</a></li>
                                                 <li><a href="?page=404">404 Error</a></li>
                                             </ul>
                                         </li>
@@ -417,17 +364,6 @@
                                             <i class="ion-navicon"></i>
                                         </a>
                                     </li>
-                                    <li class="minicart-wrap">
-                                        <a href="#miniCart" class="minicart-btn toolbar-btn">
-                                            <div class="minicart-count_area">
-                                                <span class="item-count">3</span>
-                                                <i class="far fa-heart"></i>
-                                            </div>
-                                            <div class="minicart-front_text">
-                                                <span>Wish</span>
-                                            </div>
-                                        </a>
-                                    </li>
                                     <li class="contact-us_wrap">
                                         <a href="?page=shareAnnouncment"><i class="fas fa-plus-circle"></i>Elan yerləşdir</a>
                                     </li>
@@ -438,64 +374,13 @@
                 </div>
             </div>
 
-            <div class="offcanvas-minicart_wrapper" id="miniCart">
-                <div class="offcanvas-menu-inner">
-                    <a href="#" class="btn-close"><i class="ion-android-close"></i></a>
-                    <div class="minicart-content">
-                        <div class="minicart-heading">
-                            <h4>Wish List</h4>
-                        </div>
-                        <ul class="minicart-list">
-                            <li class="minicart-product">
-                                <a class="product-item_remove" href="javascript:void(0)"><i class="ion-android-close"></i></a>
-                                <div class="product-item_img">
-                                    <img src="assets/images/product/small-size/1.jpg" alt="Uren's Product Image">
-                                </div>
-                                <div class="product-item_content">
-                                    <a class="product-item_title" href="?page=shop-left-sidebar">Autem ipsa ad</a>
-                                    <span class="product-item_quantity">1 x $145.80</span>
-                                </div>
-                            </li>
-                            <li class="minicart-product">
-                                <a class="product-item_remove" href="javascript:void(0)"><i class="ion-android-close"></i></a>
-                                <div class="product-item_img">
-                                    <img src="assets/images/product/small-size/2.jpg" alt="Uren's Product Image">
-                                </div>
-                                <div class="product-item_content">
-                                    <a class="product-item_title" href="?page=shop-left-sidebar">Tenetur illum amet</a>
-                                    <span class="product-item_quantity">1 x $150.80</span>
-                                </div>
-                            </li>
-                            <li class="minicart-product">
-                                <a class="product-item_remove" href="javascript:void(0)"><i class="ion-android-close"></i></a>
-                                <div class="product-item_img">
-                                    <img src="assets/images/product/small-size/3.jpg" alt="Uren's Product Image">
-                                </div>
-                                <div class="product-item_content">
-                                    <a class="product-item_title" href="?page=shop-left-sidebar">Non doloremque
-                                        placeat</a>
-                                    <span class="product-item_quantity">1 x $165.80</span>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="minicart-item_total">
-                        <span>Subtotal</span>
-                        <span class="ammount">$462.4‬0</span>
-                    </div>
-                </div>
-            </div>
+          
 
             <div class="mobile-menu_wrapper" id="mobileMenu">
                 <div class="offcanvas-menu-inner">
                     <div class="container">
                         <a href="#" class="btn-close"><i class="ion-android-close"></i></a>
-                        <div class="offcanvas-inner_search">
-                            <form action="#" class="inner-searchbox">
-                                <input type="text" placeholder="Search for item...">
-                                <button class="search_btn" type="submit"><i class="ion-ios-search-strong"></i></button>
-                            </form>
-                        </div>
+                       
                         <nav class="offcanvas-navigation">
                             <ul class="mobile-menu">
                                 <li class="menu-item-has-children active"><a href="?page=main"><span class="mm-text">Home</span></a>
@@ -520,25 +405,15 @@
                                         <?php
 
                                         if ($isAuthenticate) {
-                                            echo "<li>
-                                        <a href=\"logout.php\">
-                                            <span class=\"mm-text\">Logout</span>
-                                        </a>
-                                    </li>";
+                                            echo    "<li>
+                                                        <a href=\"logout.php\">
+                                                            <span class=\"mm-text\">Logout</span>
+                                                        </a>
+                                                    </li>";
                                         }
 
                                         ?>
-
-                                        <li>
-                                            <a href="?page=wishlist">
-                                                <span class="mm-text">Wishlist</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="?page=compare">
-                                                <span class="mm-text">Compare</span>
-                                            </a>
-                                        </li>
+                                       
                                         <li>
                                             <a href="?page=404">
                                                 <span class="mm-text">Error 404</span>

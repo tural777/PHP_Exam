@@ -16,17 +16,21 @@ function GetCarImgByCarId($CarId)
 
 function InsertCarImg($carImgNames, $carId)
 {
+    $target_dir = "PHP_Exam/assets/images/product/large-size/";
     if (is_array($carImgNames)) {
         global $CONN_STRING;
-//        $db_handle = pg_connect($CONN_STRING);
+        //        $db_handle = pg_connect($CONN_STRING);
         $query = "insert into car_img (car_id, img_path) values ";
+
         foreach ($carImgNames as $value) {
-            $query = $query . "('$carId','$value'),";
+            $img = "";
+            $img = $img . $target_dir . $value;
+            $query = $query . "('$carId','$img'),";
         }
         $query = substr($query, 0, -1);
 
 
-        $pg_query = pg_query( $query);
+        $pg_query = pg_query($query);
         $result = pg_fetch_row($pg_query);
         return $result;
     }

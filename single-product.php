@@ -19,19 +19,44 @@
             <div class="row">
                 <div class="col-lg-5">
                     <div class="sp-img_area">
+                        <?php
+
+                        $queryString = $_SERVER["QUERY_STRING"];
+                        $index = strpos($queryString, "id");
+                        $id = substr($queryString, $index + 3, strlen($queryString));
+                        $car = GetCarById($id);
+                        $firstImage = GetCarImgByCarId($id);
+                        $img_path = "img_path";
+
+                        // foreach ($car as $x => $x_value) {
+
+                        // 
+                        ?>
                         <div class="sp-img_slider slick-img-slider uren-slick-slider" data-slick-options='{
                                                         "slidesToShow": 1,
-                                                        "arrows": false,
+                                                        "arrows": true,
                                                         "fade": true,
                                                         "draggable": false,
                                                         "swipe": false,
                                                         "asNavFor": ".sp-img_slider-nav"
                                                         }'>
-                            <div class="single-slide red zoom">
-                                <img src="assets/images/product/large-size/1.jpg" alt="Uren's Product Image">
-                            </div>
+
+                            <?php
+
+                            foreach ($firstImage as $key => $value) {
+                                $ImageOfCar = "http://" . $_SERVER["SERVER_NAME"] . ":" . $_SERVER["SERVER_PORT"] . "/";
+
+                                $ImageOfCar = $ImageOfCar . $value[$img_path];
+
+                                echo "<div class='single-slide red zoom'> 
+                                    <img src='$ImageOfCar' alt='Uren's Product Image'> 
+                                </div>";
+                            }
+                            ?>
+
+
                         </div>
-                        <div class="sp-img_slider-nav slick-slider-nav uren-slick-slider slider-navigation_style-4" data-slick-options='{
+                        <!-- <div class="sp-img_slider-nav slick-slider-nav uren-slick-slider slider-navigation_style-4" data-slick-options='{
                                                         "slidesToShow": 3,
                                                         "asNavFor": ".sp-img_slider",
                                                         "focusOnSelect": true,
@@ -39,9 +64,9 @@
                                                         "vertical" : true
                                                         }'>
                             <div class="single-slide red">
-                                <img src="assets/images/product/small-size/1.jpg" alt="Uren's Product Thumnail">
+                                <img src="assets/images/product/small-size/2.jpg" alt="Uren's Product Thumnail">
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <div class="col-lg-7">
@@ -52,7 +77,7 @@
                         $index = strpos($queryString, "id");
                         $id = substr($queryString, $index + 3, strlen($queryString));
                         $car = GetCarById($id);
- 
+
                         foreach ($car as $x => $x_value) {
                             echo  "<div class='sp-heading'>
                                 </div>
